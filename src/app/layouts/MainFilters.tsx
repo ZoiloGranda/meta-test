@@ -1,4 +1,4 @@
-import InputFilter from "@/app/components/input-filter";
+import InputFilter from "@/app/components/InputFilter";
 import React from "react";
 
 const MainFilters = () => {

@@ -1,6 +1,6 @@
 import React from "react";
-import MainFilters from "@/app/layouts/main-filters";
-import Footer from "@/app/layouts/footer";
+import MainFilters from "@/app/layouts/MainFilters";
+import Footer from "@/app/layouts/Footer";
 import CameraLogo from "@/app/layouts/CameraLogo";
 
 const App: React.FC = () => {
