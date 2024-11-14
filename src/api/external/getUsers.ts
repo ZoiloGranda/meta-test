@@ -1,8 +1,12 @@
 import { User } from "@/api/types/User";
 
-export async function getUsers(limit: number = 25, start: number = 0): Promise<User[]> {
+export async function getUsers(limit: number = 25, start: number = 0, email?: string): Promise<User[]> {
  try {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/users?_limit=${limit}&_start=${start}`);
+  let url = `https://jsonplaceholder.typicode.com/users?_limit=${limit}&_start=${start}`;
+  if (email) {
+   url += `&email=${encodeURIComponent(email)}`;
+  }
+  const response = await fetch(url);
   if (!response.ok) {
    throw new Error('Users response was not ok');
   }

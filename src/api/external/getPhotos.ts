@@ -1,8 +1,12 @@
 import { Photo } from "@/api/types/Photo";
 
-export async function getPhotos(start: number = 0, limit: number = 25): Promise<Photo[]> {
+export async function getPhotos(limit: number = 25, start: number = 0, title?: string): Promise<Photo[]> {
  try {
-  const response = await fetch(`https://jsonplaceholder.typicode.com/photos?_start=${start}&_limit=${limit}`);
+  let url = `https://jsonplaceholder.typicode.com/photos?_limit=${limit}&_start=${start}`;
+  if (title) {
+   url += `&title=${encodeURIComponent(title)}`;
+  }
+  const response = await fetch(url);
   if (!response.ok) {
    throw new Error('Photos response was not ok');
   }
