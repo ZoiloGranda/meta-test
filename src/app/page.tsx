@@ -1,45 +1,13 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import InputFilter from "@/app/components/inputFilter";
+import MainFilters from "@/app/layouts/main-filters";
 
 const App: React.FC = () => {
-  const [filter, setFilter] = useState("");
-
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFilter(e.target.value);
-  };
-
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
-      <main className="row-start-2 flex items-center gap-8 sm:items-start">
-        <div className="flex">
-          <div className="flex flex-col">
-            <InputFilter
-              label="Filter:"
-              value={filter}
-              onChange={handleFilterChange}
-            />
-            <p>Current Filter: {filter}</p>
-          </div>
-          <div className="flex flex-col">
-            <InputFilter
-              label="Filter:"
-              value={filter}
-              onChange={handleFilterChange}
-            />
-
-            <p>Current Filter: {filter}</p>
-          </div>
-          <div className="flex flex-col">
-            <InputFilter
-              label="Filter:"
-              value={filter}
-              onChange={handleFilterChange}
-            />
-            <p>Current Filter: {filter}</p>
-          </div>
+      <main className="row-start-2 flex items-center gap-8 py-6 sm:items-start">
+        <div className="flex w-full justify-evenly">
+          <MainFilters />
         </div>
       </main>
       <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
@@ -87,6 +55,9 @@ const App: React.FC = () => {
             height={16}
           />
           Go to nextjs.org →
+        </a>
+        <a href="https://www.flaticon.com/free-icons/cute" title="cute icons">
+          Cute icons created by Freepik - Flaticon
         </a>
       </footer>
     </div>
