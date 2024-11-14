@@ -3,22 +3,23 @@ import Image from "next/image";
 
 const PhotoGrid: React.FC = () => {
   const photos = [
-    "/images/photo1.jpg",
-    "/images/photo2.jpg",
-    "/images/photo3.jpg",
-    // Add more photo paths as needed
+    "/loading.gif",
+    "/loading.gif",
+    "/loading.gif",
+    "/loading.gif",
+    "/loading.gif",
   ];
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex w-full flex-wrap justify-center gap-2">
       {photos.map((src, index) => (
         <Image
           key={index}
           src={src}
           alt={`Photo ${index + 1}`}
-          className="h-24 w-24 object-cover"
-          width={96}
-          height={96}
+          className="grow justify-items-center object-cover"
+          width={128}
+          height={128}
         />
       ))}
     </div>

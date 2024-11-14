@@ -7,7 +7,7 @@ import PhotoGrid from "@/app/layouts/PhotoGrid";
 const App: React.FC = () => {
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-wrap items-center gap-8 py-6 sm:items-start">
+      <main className="flex flex-wrap items-center gap-8 px-6 py-6 sm:items-start">
         <CameraLogo />
         <div className="flex w-full justify-evenly">
           <MainFilters />
