@@ -1,3 +1,4 @@
+"use client";
 import { Photo } from "@/api/types/Photo";
 import { ERROR_IMAGE } from "@/constants";
 import Image from "next/image";
