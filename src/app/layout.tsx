@@ -28,7 +28,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="font-[family-name:var(--font-geist-sans)]">
+          <main className="flex flex-wrap items-center gap-8 px-10 py-6 sm:items-start">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );

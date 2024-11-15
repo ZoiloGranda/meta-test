@@ -11,18 +11,16 @@ const App: React.FC = async () => {
   isLoading = false;
 
   return (
-    <div className="font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-wrap items-center gap-8 px-10 py-6 sm:items-start">
-        <CameraLogo />
-        <div className="flex w-full justify-evenly">
-          <MainFilters />
-        </div>
-        <div className="flex w-full justify-evenly">
-          <PhotoGrid photos={fetchedPhotos} isLoading={isLoading} />
-        </div>
-      </main>
+    <>
+      <CameraLogo />
+      <div className="flex w-full justify-evenly">
+        <MainFilters />
+      </div>
+      <div className="flex w-full justify-evenly">
+        <PhotoGrid photos={fetchedPhotos} isLoading={isLoading} />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
