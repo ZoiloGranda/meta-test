@@ -2,6 +2,7 @@
 import { Photo } from "@/api/types/Photo";
 import { ERROR_IMAGE } from "@/constants";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 interface PhotoItemProps {
@@ -30,16 +31,18 @@ const PhotoItem: React.FC<PhotoItemProps> = ({ photo }) => {
   return (
     <>
       <div className={loaderClasses}>
-        <Image
-          key={photo.id}
-          src={photoSrc}
-          alt={photo.title}
-          className={imgClasses}
-          width={128}
-          height={128}
-          onLoad={onLoadEvent}
-          onError={onErrorEvent}
-        />
+        <Link href={`/${photo.id}`}>
+          <Image
+            key={photo.id}
+            src={photoSrc}
+            alt={photo.title}
+            className={imgClasses}
+            width={128}
+            height={128}
+            onLoad={onLoadEvent}
+            onError={onErrorEvent}
+          />
+        </Link>
       </div>
     </>
   );
