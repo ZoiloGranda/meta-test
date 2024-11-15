@@ -19,7 +19,6 @@ const InputFilter: React.FC<InputProps> = ({ label }) => {
         onChange={handleValueChange}
         className="rounded-md border border-gray-300 px-3 py-2 focus:border-blue-300 focus:outline-none focus:ring"
       />
-      <p>Current Photo Title: {value}</p>
     </div>
   );
 };
