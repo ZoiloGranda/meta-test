@@ -25,7 +25,7 @@ const PhotoItem: React.FC<PhotoItemProps> = ({ photo }) => {
     : "";
   const imgClasses = isLoading
     ? "justify-items-center object-cover"
-    : "justify-items-center border-2 border-solid border-indigo-600 object-cover";
+    : "justify-items-center border-2 border-solid border-indigo-600 object-cover hover:border-4 cursor-pointer hover:border-indigo-800";
 
   return (
     <>
