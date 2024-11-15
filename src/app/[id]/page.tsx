@@ -28,8 +28,10 @@ const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
       {isLoading && <div>Loading...</div>}
       {photoWithMetadata && (
         <div className="flex w-full flex-wrap">
-          <h1 className="w-full">Photo Title</h1>
-          <h2 className="w-full">{photoWithMetadata.title}</h2>
+          <h1 className="mb-4 w-full text-3xl font-bold">Photo Title</h1>
+          <h2 className="w-full text-xl capitalize text-gray-600">
+            {photoWithMetadata.title}
+          </h2>
           <div className="flex w-full flex-wrap justify-between">
             <div className="flex flex-wrap">
               <img
