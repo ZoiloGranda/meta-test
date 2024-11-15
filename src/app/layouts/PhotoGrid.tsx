@@ -1,27 +1,25 @@
 import React from "react";
-import Image from "next/image";
+import { Photo } from "@/api/types/Photo";
+import PhotoItem from "@/app/components/PhotoItem";
 
-const PhotoGrid: React.FC = () => {
-  const photos = [
-    "/loading.gif",
-    "/loading.gif",
-    "/loading.gif",
-    "/loading.gif",
-    "/loading.gif",
-  ];
+interface PhotoGridProps {
+  photos: Photo[];
+  isLoading: boolean;
+}
 
+const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, isLoading }) => {
   return (
     <div className="flex w-full flex-wrap justify-center gap-2">
-      {photos.map((src, index) => (
-        <Image
-          key={index}
-          src={src}
-          alt={`Photo ${index + 1}`}
-          className="grow justify-items-center object-cover"
-          width={128}
-          height={128}
-        />
-      ))}
+      {isLoading && (
+        <div className="loader h-32 w-32 justify-items-center object-cover"></div>
+      )}
+      {!isLoading && (
+        <>
+          {photos.map((photo) => (
+            <PhotoItem key={photo.id} photo={photo} />
+          ))}
+        </>
+      )}
     </div>
   );
 };
