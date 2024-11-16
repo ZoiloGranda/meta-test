@@ -12,6 +12,8 @@ interface HandlePhotoTitleChangeParams {
  userEmailFilter: string;
  photoTitleFilter: string;
  filteredPhotos: Photo[];
+ currentUserId: number;
+ setCurrentUserId: (id: number) => void;
 }
 
 export const handlePhotoTitleChange = async ({
@@ -24,6 +26,8 @@ export const handlePhotoTitleChange = async ({
  userEmailFilter,
  photoTitleFilter,
  filteredPhotos,
+ currentUserId,
+ setCurrentUserId
 }: HandlePhotoTitleChangeParams) => {
  console.log('photo value', value)
  if (!value) {
@@ -37,7 +41,9 @@ export const handlePhotoTitleChange = async ({
     albumTitleFilter,
     userEmailFilter,
     photoTitleFilter,
-    filteredPhotos
+    filteredPhotos,
+    currentUserId,
+    setCurrentUserId
    });
   }
   if (!albumTitleFilter && !userEmailFilter) {

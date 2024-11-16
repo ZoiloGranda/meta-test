@@ -35,6 +35,8 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
           userEmailFilter,
           photoTitleFilter,
           filteredPhotos,
+          currentUserId,
+          setCurrentUserId,
         });
         break;
       case "album":
