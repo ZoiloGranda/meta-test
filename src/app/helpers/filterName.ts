@@ -4,7 +4,8 @@ import { getUsers } from "@/api/external/getUsers";
 
 export type EntityType = 'photo' | 'album' | 'user';
 
-export function parseFilter(input: string): { type: EntityType; field: string } {
+export type FiltersObject = { type: EntityType; field: string }
+export function parseFilter(input: string): FiltersObject {
  const [type, field] = input.split('.');
  return { type: type as EntityType, field };
 }
