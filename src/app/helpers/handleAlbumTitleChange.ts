@@ -32,7 +32,7 @@ export const handleAlbumTitleChange = async ({
   setAlbumTitleFilter("");
   if (photoTitleFilter) {
    await handlePhotoTitleChange({
-    value,
+    value: photoTitleFilter,
     setPhotoTitleFilter,
     setAlbumTitleFilter,
     setFilteredPhotos,
