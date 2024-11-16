@@ -46,10 +46,17 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
   }) => {
     const filteredAlbums = await getAlbums({ [filters.field]: value });
     console.log("filteredAlbums", filteredAlbums);
-    const albumPhotos = await getPhotos({ albumId: filteredAlbums[0].id });
-    console.log("albumPhotos", albumPhotos);
+
+    const albumPhotosPromises = filteredAlbums.map((album) =>
+      getPhotos({ albumId: album.id }),
+    );
+    const allAlbumPhotos = await Promise.all(albumPhotosPromises);
+
+    const aggregatedPhotos = allAlbumPhotos.flat();
+    console.log("aggregatedPhotos", aggregatedPhotos);
+
     setIsLoading(false);
-    setFilteredPhotos(albumPhotos);
+    setFilteredPhotos(aggregatedPhotos);
   };
 
   const handleFilterChange = async (filterName: string, value: string) => {
