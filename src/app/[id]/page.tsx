@@ -45,9 +45,11 @@ const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
               <img
                 src={photoWithMetadata.url}
                 alt={photoWithMetadata.title}
-                onLoad={() => setIsImageLoading(false)}
+                width="600"
+                height="600"
                 onError={() => setIsImageLoading(false)}
-                className={`${isImageLoading ? "hidden" : "block"}`}
+                onLoad={() => setIsImageLoading(false)}
+                className={`${isImageLoading ? "hidden" : "block h-fit"}`}
               />
             </div>
             <PhotoData photoWithMetadata={photoWithMetadata} />
