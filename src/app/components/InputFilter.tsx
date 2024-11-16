@@ -3,16 +3,20 @@ import React, { useState } from "react";
 
 interface InputProps {
   label: string;
+  filterName: string;
   onFilterChange: (filter: string, value: string) => void;
 }
 
-const InputFilter: React.FC<InputProps> = ({ label, onFilterChange }) => {
+const InputFilter: React.FC<InputProps> = ({
+  label,
+  filterName,
+  onFilterChange,
+}) => {
   const [value, setValue] = useState("");
-
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
-    onFilterChange(label, newValue);
+    onFilterChange(filterName, newValue);
   };
 
   return (

@@ -10,12 +10,12 @@ const MainFilters: React.FC<MainFiltersProps> = ({ onFilterChange }) => {
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const debounce = useCallback(
-    (filter: string, value: string) => {
+    (filterName: string, value: string) => {
       if (debounceTimeout.current) {
         clearTimeout(debounceTimeout.current);
       }
       debounceTimeout.current = setTimeout(() => {
-        onFilterChange(filter, value);
+        onFilterChange(filterName, value);
       }, 300);
     },
     [onFilterChange],
@@ -24,13 +24,25 @@ const MainFilters: React.FC<MainFiltersProps> = ({ onFilterChange }) => {
   return (
     <>
       <div className="flex flex-col">
-        <InputFilter label="Photo Title" onFilterChange={debounce} />
+        <InputFilter
+          label="Photo Title"
+          filterName="photo.title"
+          onFilterChange={debounce}
+        />
       </div>
       <div className="flex flex-col">
-        <InputFilter label="Album Title" onFilterChange={debounce} />
+        <InputFilter
+          label="Album Title"
+          filterName="album.title"
+          onFilterChange={debounce}
+        />
       </div>
       <div className="flex flex-col">
-        <InputFilter label="User Email" onFilterChange={debounce} />
+        <InputFilter
+          label="User Email"
+          filterName="user.email"
+          onFilterChange={debounce}
+        />
       </div>
     </>
   );

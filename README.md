@@ -10,6 +10,7 @@ const imgClasses = isLoading
 Other routes send to home
 Hosting
  change pages directory
+ use API_URL from constants
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
