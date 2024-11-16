@@ -34,13 +34,14 @@ export const handlePhotoTitleChange = async ({
   setPhotoTitleFilter("");
   if (albumTitleFilter) {
    handleAlbumTitleChange({
-    value: albumTitleFilter, setPhotoTitleFilter,
+    value: albumTitleFilter,
+    setPhotoTitleFilter,
     setAlbumTitleFilter,
     setFilteredPhotos,
     setIsLoading,
     albumTitleFilter,
     userEmailFilter,
-    photoTitleFilter,
+    photoTitleFilter: '',
     filteredPhotos,
     currentUserId,
     setCurrentUserId
