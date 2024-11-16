@@ -14,7 +14,9 @@ const InputFilter: React.FC<InputProps> = ({
 }) => {
   const [value, setValue] = useState("");
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+    const newValue = e.target.value.trim();
+    if (value === newValue) return;
+    if (!newValue && !value) return;
     setValue(newValue);
     onFilterChange(filterName, newValue);
   };
