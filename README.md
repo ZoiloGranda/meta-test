@@ -13,8 +13,8 @@ Hosting
 change pages directory
 use API_URL from constants
 use the same function schema for all get endpoints
-remove console.logs
 style spacing in photodata
+move filtering functions out of MainWrapper
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 

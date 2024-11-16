@@ -28,22 +28,18 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
       return;
     }
     const filteredUsers = await getUsers({ email: value });
-    console.log("filteredUsers", filteredUsers);
     const userAlbums = await getAlbums({ userId: filteredUsers[0].id });
-    console.log("userAlbums", userAlbums);
     if (photoTitleFilter) {
       const albumIds = userAlbums.map((album) => album.id);
       const photosByUser = filteredPhotos.filter((photo) =>
         albumIds.includes(photo.albumId),
       );
-      console.log("photosByUser", photosByUser);
       setUserEmailFilter(value);
       setFilteredPhotos(photosByUser);
       setIsLoading(false);
       return;
     }
     const userPhotos = await getPhotos({ albumId: userAlbums[0].id });
-    console.log("userPhotos", userPhotos);
     setUserEmailFilter(value);
     setFilteredPhotos(userPhotos);
     setIsLoading(false);
@@ -58,13 +54,11 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
       return;
     }
     const filteredAlbums = await getAlbums({ title: value });
-    console.log("filteredAlbums", filteredAlbums);
     const albumPhotosPromises = filteredAlbums.map((album) =>
       getPhotos({ albumId: album.id }),
     );
     const allAlbumPhotos = await Promise.all(albumPhotosPromises);
     let aggregatedPhotos = allAlbumPhotos.flat();
-    console.log("aggregatedPhotos", aggregatedPhotos);
     if (photoTitleFilter) {
       const albumIds = filteredAlbums.map((album) => album.id);
       aggregatedPhotos = filteredPhotos.filter((photo) =>
@@ -91,7 +85,6 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
       return;
     }
     const photosByTitle = await getPhotos({ title: value });
-    console.log("photosByTitle", photosByTitle);
     setPhotoTitleFilter(value);
     setIsLoading(false);
     setFilteredPhotos(photosByTitle);
@@ -99,7 +92,6 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
 
   const handleFilterChange = async (filterName: string, value: string) => {
     setIsLoading(true);
-    console.log("InputFilter", filterName, value);
     const filters = parseFilter(filterName);
     switch (filters.type) {
       case "photo":
