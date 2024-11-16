@@ -65,19 +65,19 @@ export const handleAlbumTitleChange = async ({
    title: value,
   });
  }
- const albumPhotosPromises = filteredAlbums.map((album) =>
-  getPhotos({ albumId: [album.id] }),
- );
- const allAlbumPhotos = await Promise.all(albumPhotosPromises);
- let aggregatedPhotos = allAlbumPhotos.flat();
+ const albumIds = filteredAlbums.map(album => album.id);
+ console.log('albumIds ', albumIds)
+ let albumPhotosPromises = await getPhotos({ albumId: albumIds })
+
+ // const allAlbumPhotos = await Promise.all(albumPhotosPromises);
+ // let aggregatedPhotos = allAlbumPhotos.flat();
  console.log('photoTitleFilter ', photoTitleFilter)
  if (photoTitleFilter) {
-  const albumIds = filteredAlbums.map((album) => album.id);
-  aggregatedPhotos = filteredPhotos.filter((photo) =>
+  albumPhotosPromises = filteredPhotos.filter((photo) =>
    albumIds.includes(photo.albumId),
   );
  }
  setAlbumTitleFilter(value);
- setFilteredPhotos(aggregatedPhotos);
+ setFilteredPhotos(albumPhotosPromises);
  setIsLoading(false);
 };
