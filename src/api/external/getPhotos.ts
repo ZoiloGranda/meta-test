@@ -4,17 +4,22 @@ interface GetPhotosParams {
  limit?: number;
  start?: number;
  title?: string;
+ albumId?: number;
 }
 
 export async function getPhotos({
  limit = 25,
  start = 0,
  title,
+ albumId,
 }: GetPhotosParams = {}): Promise<Photo[]> {
  try {
   let url = `https://jsonplaceholder.typicode.com/photos?_limit=${limit}&_start=${start}`;
   if (title) {
    url += `&title_like=${encodeURIComponent(title)}`;
+  }
+  if (albumId) {
+   url += `&albumId=${albumId}`;
   }
   const response = await fetch(url);
   if (!response.ok) {
