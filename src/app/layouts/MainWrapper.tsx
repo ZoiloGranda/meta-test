@@ -3,11 +3,7 @@ import { getAlbums } from "@/api/external/getAlbums";
 import { getPhotos } from "@/api/external/getPhotos";
 import { getUsers } from "@/api/external/getUsers";
 import { Photo } from "@/api/types/Photo";
-import {
-  FiltersObject,
-  getEndpoint,
-  parseFilter,
-} from "@/app/helpers/filterName";
+import { FiltersObject, parseFilter } from "@/app/helpers/filterName";
 import MainFilters from "@/app/layouts/MainFilters";
 import PhotoGrid from "@/app/layouts/PhotoGrid";
 import React, { useState } from "react";
@@ -46,17 +42,21 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
   }) => {
     const filteredAlbums = await getAlbums({ [filters.field]: value });
     console.log("filteredAlbums", filteredAlbums);
-
     const albumPhotosPromises = filteredAlbums.map((album) =>
       getPhotos({ albumId: album.id }),
     );
     const allAlbumPhotos = await Promise.all(albumPhotosPromises);
-
     const aggregatedPhotos = allAlbumPhotos.flat();
     console.log("aggregatedPhotos", aggregatedPhotos);
-
     setIsLoading(false);
     setFilteredPhotos(aggregatedPhotos);
+  };
+
+  const handlePhotoTitleChange = async ({ value }: { value: string }) => {
+    const photosByTitle = await getPhotos({ title: value });
+    console.log("photosByTitle", photosByTitle);
+    setIsLoading(false);
+    setFilteredPhotos(photosByTitle);
   };
 
   const handleFilterChange = async (filterName: string, value: string) => {
@@ -65,10 +65,7 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
     const filters = parseFilter(filterName);
     switch (filters.type) {
       case "photo":
-        const getFn = getEndpoint(filters.type);
-        const filteredPhotos = await getFn({ [filters.field]: value });
-        console.log(filteredPhotos);
-        // setFilteredPhotos(filteredPhotos);
+        handlePhotoTitleChange({ value });
         break;
       case "album":
         handleAlbumTitleChange({ filters, value });
@@ -79,13 +76,6 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
       default:
         break;
     }
-
-    // console.log(filters);
-    // const getFn = getEndpoint(filters.type);
-    // const filteredPhotos = await getFn({ [filters.field]: value });
-    // console.log(filteredPhotos);
-    // // setFilteredPhotos(filteredPhotos);
-    // setIsLoading(false);
   };
 
   return (
