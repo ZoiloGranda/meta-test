@@ -2,7 +2,7 @@ import { getAlbums } from "@/api/external/getAlbums";
 import { getPhotos } from "@/api/external/getPhotos";
 import { getUsers } from "@/api/external/getUsers";
 import { Photo } from "@/api/types/Photo";
-import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
+import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 
 interface HandleUserEmailChangeParams {
  value: string;
@@ -31,9 +31,10 @@ export const handleUserEmailChange = async ({
  if (!value) {
   setUserEmailFilter("");
   console.log("photoTitleFilter", photoTitleFilter);
-  if (photoTitleFilter) {
-   await handlePhotoTitleChange({
-    value: photoTitleFilter,
+  console.log("albumTitleFilter", albumTitleFilter);
+  if (albumTitleFilter) {
+   await handleAlbumTitleChange({
+    value: albumTitleFilter,
     setPhotoTitleFilter,
     setAlbumTitleFilter,
     setFilteredPhotos,
@@ -44,6 +45,7 @@ export const handleUserEmailChange = async ({
     filteredPhotos
    });
   }
+
   if (!photoTitleFilter && !albumTitleFilter) {
    const fetchedPhotos = await getPhotos();
    setIsLoading(false);
