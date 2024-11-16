@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { getPhotoWithMetadata } from "@/api/internal/getPhotoWithMetadata";
 import { PhotoWithMetadata } from "@/api/types/Photo";
+import PhotoData from "@/app/layouts/PhotoData";
 
 const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -42,19 +43,14 @@ const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
                 <div className="loader h-32 w-32 justify-items-center object-cover"></div>
               )}
               <img
-                src={photoWithMetadata.thumbnailUrl}
+                src={photoWithMetadata.url}
                 alt={photoWithMetadata.title}
                 onLoad={() => setIsImageLoading(false)}
                 onError={() => setIsImageLoading(false)}
                 className={`${isImageLoading ? "hidden" : "block"}`}
               />
             </div>
-            <div className="flex flex-wrap">
-              <p className="w-full">Album: {photoWithMetadata.album.title}</p>
-              <p className="w-full">
-                User: {photoWithMetadata.album.user.name}
-              </p>
-            </div>
+            <PhotoData photoWithMetadata={photoWithMetadata} />
           </div>
         </div>
       )}
