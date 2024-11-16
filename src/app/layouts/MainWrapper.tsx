@@ -19,10 +19,16 @@ const MainWrapper = () => {
   const [userEmailFilter, setUserEmailFilter] = useState("");
   const [currentUserId, setCurrentUserId] = useState(0);
 
-  const fetchPhotos = async (page: number) => {
+  const emptyFilters =
+    !photoTitleFilter && !albumTitleFilter && !userEmailFilter;
+
+  const fetchPhotos = async () => {
     setIsLoading(true);
     try {
-      const photos = await getPhotos({ limit: 25, start: (page - 1) * 25 });
+      const photos = await getPhotos({
+        limit: 25,
+        start: (currentPage - 1) * 25,
+      });
       setFilteredPhotos(photos);
     } catch (error) {
       console.error("Error fetching photos:", error);
@@ -32,7 +38,11 @@ const MainWrapper = () => {
   };
 
   useEffect(() => {
-    // fetchPhotos(currentPage);
+    if (emptyFilters) {
+      fetchPhotos();
+      return;
+    }
+    if (!albumTitleFilter) return;
     handleAlbumTitleChange({
       value: albumTitleFilter,
       setPhotoTitleFilter,
