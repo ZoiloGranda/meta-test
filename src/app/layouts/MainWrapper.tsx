@@ -25,6 +25,12 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
       if (photoTitleFilter) {
         handlePhotoTitleChange({ value: photoTitleFilter });
       }
+      if (!photoTitleFilter && !albumTitleFilter) {
+        const fetchedPhotos = await getPhotos();
+        setIsLoading(false);
+        setFilteredPhotos(fetchedPhotos);
+        return;
+      }
       return;
     }
     const filteredUsers = await getUsers({ email: value });
@@ -50,6 +56,13 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
       setAlbumTitleFilter("");
       if (photoTitleFilter) {
         handlePhotoTitleChange({ value: photoTitleFilter });
+        return;
+      }
+      if (!photoTitleFilter && !userEmailFilter) {
+        const fetchedPhotos = await getPhotos();
+        setIsLoading(false);
+        setFilteredPhotos(fetchedPhotos);
+        return;
       }
       return;
     }

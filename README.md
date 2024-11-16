@@ -1,5 +1,6 @@
 ## To Do
 
+filtering email then album title not working
 pagination
 Toast for errors
 tests
