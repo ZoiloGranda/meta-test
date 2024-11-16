@@ -54,9 +54,18 @@ export const handlePhotoTitleChange = async ({
   }
   return;
  }
+ if (albumTitleFilter || userEmailFilter) {
+  const updatedPhotos = filteredPhotos.filter((photo) => {
+   return photo.title.toLowerCase().includes(value.toLowerCase())
+  })
+  setFilteredPhotos(updatedPhotos);
+  setPhotoTitleFilter(value);
+  setIsLoading(false);
+  return
+ }
  const photosByTitle = await getPhotos({ title: value });
  console.log('photosByTitle', photosByTitle)
  setPhotoTitleFilter(value);
- setIsLoading(false);
  setFilteredPhotos(photosByTitle);
+ setIsLoading(false);
 };
