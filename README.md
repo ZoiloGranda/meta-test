@@ -1,6 +1,7 @@
 ## To Do
 
 filtering email then album title not working
+filter by photo, album and user, and then removing user, not working
 pagination
 Toast for errors
 tests
