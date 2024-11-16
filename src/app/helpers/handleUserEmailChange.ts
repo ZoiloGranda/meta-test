@@ -15,6 +15,8 @@ interface HandleUserEmailChangeParams {
  userEmailFilter: string;
  photoTitleFilter: string;
  filteredPhotos: Photo[];
+ currentUserId: number;
+ setCurrentUserId: (id: number) => void;
 }
 export const handleUserEmailChange = async ({
  value,
@@ -26,10 +28,13 @@ export const handleUserEmailChange = async ({
  albumTitleFilter,
  userEmailFilter,
  photoTitleFilter,
- filteredPhotos
+ filteredPhotos,
+ currentUserId,
+ setCurrentUserId
 }: HandleUserEmailChangeParams) => {
  if (!value) {
   setUserEmailFilter("");
+  setCurrentUserId(0);
   console.log("photoTitleFilter", photoTitleFilter);
   console.log("albumTitleFilter", albumTitleFilter);
   if (albumTitleFilter) {
@@ -42,7 +47,9 @@ export const handleUserEmailChange = async ({
     albumTitleFilter,
     userEmailFilter,
     photoTitleFilter,
-    filteredPhotos
+    filteredPhotos,
+    currentUserId,
+    setCurrentUserId
    });
   }
 
@@ -55,7 +62,9 @@ export const handleUserEmailChange = async ({
   return;
  }
  const filteredUsers = await getUsers({ email: value });
- const userAlbums = await getAlbums({ userId: filteredUsers[0].id });
+ const userId = filteredUsers[0].id;
+ setCurrentUserId(userId);
+ const userAlbums = await getAlbums({ userId });
  if (photoTitleFilter) {
   const albumIds = userAlbums.map((album) => album.id);
   const photosByUser = filteredPhotos.filter((photo) =>

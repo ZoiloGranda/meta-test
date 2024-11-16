@@ -13,6 +13,8 @@ interface HandleAlbumTitleChangeParams {
  userEmailFilter: string;
  photoTitleFilter: string;
  filteredPhotos: Photo[];
+ currentUserId: number;
+ setCurrentUserId: (id: number) => void;
 }
 
 export const handleAlbumTitleChange = async ({
@@ -25,7 +27,8 @@ export const handleAlbumTitleChange = async ({
  userEmailFilter,
  photoTitleFilter,
  filteredPhotos,
-
+ currentUserId,
+ setCurrentUserId
 }: HandleAlbumTitleChangeParams) => {
  console.log('album value', value)
  if (!value) {
@@ -52,7 +55,14 @@ export const handleAlbumTitleChange = async ({
   }
   return;
  }
- const filteredAlbums = await getAlbums({ title: value });
+ let filteredAlbums = [];
+ if (userEmailFilter) {
+  filteredAlbums = await getAlbums({ title: value, userId: currentUserId });
+ } else {
+  filteredAlbums = await getAlbums({
+   title: value,
+  });
+ }
  const albumPhotosPromises = filteredAlbums.map((album) =>
   getPhotos({ albumId: album.id }),
  );

@@ -18,6 +18,7 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
   const [photoTitleFilter, setPhotoTitleFilter] = useState("");
   const [albumTitleFilter, setAlbumTitleFilter] = useState("");
   const [userEmailFilter, setUserEmailFilter] = useState("");
+  const [currentUserId, setCurrentUserId] = useState(0);
 
   const handleFilterChange = async (filterName: string, value: string) => {
     setIsLoading(true);
@@ -47,6 +48,8 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
           userEmailFilter,
           photoTitleFilter,
           filteredPhotos,
+          currentUserId,
+          setCurrentUserId,
         });
         break;
       case "user":
@@ -61,6 +64,8 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
           userEmailFilter,
           photoTitleFilter,
           filteredPhotos,
+          setCurrentUserId,
+          currentUserId,
         });
         break;
       default:

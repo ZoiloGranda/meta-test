@@ -19,6 +19,7 @@ use API_URL from constants
 use the same function schema for all get endpoints
 style spacing in photodata
 move filtering functions out of MainWrapper
+move HandleAlbumTitleChangeParams to common params
 
 ## Getting Started
 
