@@ -5,6 +5,7 @@ interface GetAlbumsParams {
  start?: number;
  title?: string;
  userId?: number;
+ page?: number;
 }
 
 export async function getAlbums({
@@ -12,6 +13,7 @@ export async function getAlbums({
  start = 0,
  title,
  userId,
+ page,
 }: GetAlbumsParams = {}): Promise<Album[]> {
  try {
   const params = new URLSearchParams({
@@ -25,6 +27,9 @@ export async function getAlbums({
 
   if (userId) {
    params.append("userId", userId.toString());
+  }
+  if (page) {
+   params.append("_page", page.toString());
   }
 
   const response = await fetch(

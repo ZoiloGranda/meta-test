@@ -66,7 +66,7 @@ export const handleAlbumTitleChange = async ({
   });
  }
  const albumPhotosPromises = filteredAlbums.map((album) =>
-  getPhotos({ albumId: album.id }),
+  getPhotos({ albumId: [album.id] }),
  );
  const allAlbumPhotos = await Promise.all(albumPhotosPromises);
  let aggregatedPhotos = allAlbumPhotos.flat();

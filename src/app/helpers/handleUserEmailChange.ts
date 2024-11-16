@@ -75,7 +75,7 @@ export const handleUserEmailChange = async ({
   setIsLoading(false);
   return;
  }
- const userPhotosPromises = userAlbums.map(album => getPhotos({ albumId: album.id }));
+ const userPhotosPromises = userAlbums.map(album => getPhotos({ albumId: [album.id] }));
  const userPhotosArrays = await Promise.all(userPhotosPromises);
  const userPhotos = userPhotosArrays.flat();
  setUserEmailFilter(value);

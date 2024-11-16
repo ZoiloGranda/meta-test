@@ -1,5 +1,6 @@
 ## To Do
 
+first album title the user email not workin
 pagination
 Toast for errors
 tests
