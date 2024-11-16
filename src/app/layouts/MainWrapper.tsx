@@ -26,15 +26,33 @@ const MainWrapper: React.FC<MainWrapperProps> = ({ photos }) => {
     filters: FiltersObject;
     value: string;
   }) => {
+    if (!value) {
+      setUserEmailFilter("");
+      if (photoTitleFilter) {
+        handlePhotoTitleChange({ value: photoTitleFilter });
+      }
+      return;
+    }
     const filteredUsers = await getUsers({ [filters.field]: value });
     console.log("filteredUsers", filteredUsers);
     const userAlbums = await getAlbums({ userId: filteredUsers[0].id });
     console.log("userAlbums", userAlbums);
+    if (photoTitleFilter) {
+      const albumIds = userAlbums.map((album) => album.id);
+      const photosByUser = filteredPhotos.filter((photo) =>
+        albumIds.includes(photo.albumId),
+      );
+      console.log("photosByUser", photosByUser);
+      setUserEmailFilter(value);
+      setFilteredPhotos(photosByUser);
+      setIsLoading(false);
+      return;
+    }
     const userPhotos = await getPhotos({ albumId: userAlbums[0].id });
     console.log("userPhotos", userPhotos);
     setUserEmailFilter(value);
-    setIsLoading(false);
     setFilteredPhotos(userPhotos);
+    setIsLoading(false);
   };
 
   const handleAlbumTitleChange = async ({
