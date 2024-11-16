@@ -32,7 +32,22 @@ const MainWrapper = () => {
   };
 
   useEffect(() => {
-    fetchPhotos(currentPage);
+    // fetchPhotos(currentPage);
+    handleAlbumTitleChange({
+      value: albumTitleFilter,
+      setPhotoTitleFilter,
+      setAlbumTitleFilter,
+      setFilteredPhotos,
+      setIsLoading,
+      albumTitleFilter,
+      userEmailFilter,
+      photoTitleFilter,
+      filteredPhotos,
+      currentUserId,
+      setCurrentUserId,
+      currentPage,
+      setCurrentPage,
+    });
   }, [currentPage]);
 
   const handleFilterChange = async (filterName: string, value: string) => {
@@ -67,6 +82,8 @@ const MainWrapper = () => {
           filteredPhotos,
           currentUserId,
           setCurrentUserId,
+          currentPage,
+          setCurrentPage,
         });
         break;
       case "user":

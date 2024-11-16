@@ -1,6 +1,8 @@
 ## To Do
 
-first album title the user email not workin
+first album title the user email not working
+clear page on filter change
+paginate album should not request album data again when changing pages, only photo data
 pagination
 Toast for errors
 tests

@@ -15,6 +15,8 @@ interface HandleAlbumTitleChangeParams {
  filteredPhotos: Photo[];
  currentUserId: number;
  setCurrentUserId: (id: number) => void;
+ currentPage: number;
+ setCurrentPage: (page: number) => void;
 }
 
 export const handleAlbumTitleChange = async ({
@@ -28,7 +30,8 @@ export const handleAlbumTitleChange = async ({
  photoTitleFilter,
  filteredPhotos,
  currentUserId,
- setCurrentUserId
+ setCurrentUserId,
+ currentPage
 }: HandleAlbumTitleChangeParams) => {
  console.log('album value', value)
  if (!value) {
@@ -67,10 +70,7 @@ export const handleAlbumTitleChange = async ({
  }
  const albumIds = filteredAlbums.map(album => album.id);
  console.log('albumIds ', albumIds)
- let albumPhotosPromises = await getPhotos({ albumId: albumIds })
-
- // const allAlbumPhotos = await Promise.all(albumPhotosPromises);
- // let aggregatedPhotos = allAlbumPhotos.flat();
+ let albumPhotosPromises = await getPhotos({ albumId: albumIds, start: (currentPage - 1) * 25 })
  console.log('photoTitleFilter ', photoTitleFilter)
  if (photoTitleFilter) {
   albumPhotosPromises = filteredPhotos.filter((photo) =>
