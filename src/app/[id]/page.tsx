@@ -5,6 +5,8 @@ import { PhotoWithMetadata } from "@/api/types/Photo";
 
 const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [isImageLoading, setIsImageLoading] = useState(true);
+
   const [photoWithMetadata, setPhotoWithMetadata] =
     useState<PhotoWithMetadata>();
 
@@ -25,7 +27,9 @@ const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && (
+        <div className="loader h-32 w-32 justify-items-center object-cover"></div>
+      )}
       {photoWithMetadata && (
         <div className="flex w-full flex-wrap">
           <h1 className="mb-4 w-full text-3xl font-bold">Photo Title</h1>
@@ -34,9 +38,15 @@ const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
           </h2>
           <div className="flex w-full flex-wrap justify-between">
             <div className="flex flex-wrap">
+              {isImageLoading && (
+                <div className="loader h-32 w-32 justify-items-center object-cover"></div>
+              )}
               <img
                 src={photoWithMetadata.thumbnailUrl}
                 alt={photoWithMetadata.title}
+                onLoad={() => setIsImageLoading(false)}
+                onError={() => setIsImageLoading(false)}
+                className={`${isImageLoading ? "hidden" : "block"}`}
               />
             </div>
             <div className="flex flex-wrap">

@@ -10,12 +10,12 @@ interface PhotoItemProps {
 }
 
 const PhotoItem: React.FC<PhotoItemProps> = ({ photo }) => {
-  const [photoSrc, setPhotoSrc] = useState(photo.thumbnailUrl);
+  const [photoSrc, setPhotoSrc] = useState(photo.url);
   const [isLoading, setIsLoading] = useState(true);
 
   const onLoadEvent = () => {
     setIsLoading(false);
-    setPhotoSrc(photo.thumbnailUrl);
+    setPhotoSrc(photo.url);
   };
   const onErrorEvent = () => {
     setIsLoading(false);
