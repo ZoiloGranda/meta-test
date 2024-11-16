@@ -4,12 +4,14 @@ interface GetAlbumsParams {
  limit?: number;
  start?: number;
  title?: string;
+ userId?: number;
 }
 
 export async function getAlbums({
  limit = 25,
  start = 0,
  title,
+ userId,
 }: GetAlbumsParams = {}): Promise<Album[]> {
  try {
   const params = new URLSearchParams({
@@ -21,8 +23,12 @@ export async function getAlbums({
    params.append("title_like", title);
   }
 
+  if (userId) {
+   params.append("userId", userId.toString());
+  }
+
   const response = await fetch(
-   `https://jsonplaceholder.typicode.com/albums?${params.toString()}`,
+   `https://jsonplaceholder.typicode.com/albums?${params.toString()}`
   );
   if (!response.ok) {
    throw new Error("Albums response was not ok");
