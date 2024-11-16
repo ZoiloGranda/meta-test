@@ -1,3 +1,4 @@
+import PaginationButton from "@/app/components/PaginationButton";
 import React from "react";
 
 interface PaginationProps {
@@ -23,13 +24,12 @@ const Pagination: React.FC<PaginationProps> = ({
         Previous
       </button>
       {pages.map((page) => (
-        <button
+        <PaginationButton
           key={page}
-          onClick={() => onPageChange(page)}
-          className={`rounded-md px-3 py-1 ${currentPage === page ? "bg-blue-700 text-white" : "bg-blue-500 text-white hover:bg-blue-600"}`}
-        >
-          {page}
-        </button>
+          page={page}
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+        />
       ))}
       <button
         onClick={() => onPageChange(currentPage + 1)}
