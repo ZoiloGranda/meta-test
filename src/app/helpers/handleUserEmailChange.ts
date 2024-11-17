@@ -1,5 +1,6 @@
 import { Photo } from "@/models/Photo";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
+import { Album } from "@/models/Album";
 
 interface HandleUserEmailChangeParams {
   value: string;
@@ -73,7 +74,7 @@ export const handleUserEmailChange = async ({
   setCurrentUserId(userId);
   const albumResponse = await fetch(`/api/albums?userId=${userId}`);
   const albumData = await albumResponse.json();
-  const userAlbums = albumData.albums;
+  const userAlbums: Album[] = albumData.albums;
   const albumIds = userAlbums.map((album) => album.id);
   if (photoTitleFilter) {
     const photosByUser = filteredPhotos.filter((photo) =>

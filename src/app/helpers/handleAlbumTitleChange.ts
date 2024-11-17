@@ -1,5 +1,6 @@
 import { Photo } from "@/models/Photo";
 import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
+import { Album } from "@/models/Album";
 
 interface HandleAlbumTitleChangeParams {
   value: string;
@@ -68,7 +69,7 @@ export const handleAlbumTitleChange = async ({
     : `/api/albums?title=${encodeURIComponent(value)}`;
   const response = await fetch(url);
   const data = await response.json();
-  const filteredAlbums = data.albums;
+  const filteredAlbums: Album[] = data.albums;
   const albumIds = filteredAlbums.map((album) => album.id);
   const albumPhotos = photoTitleFilter
     ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))

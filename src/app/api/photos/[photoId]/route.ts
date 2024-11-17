@@ -2,7 +2,14 @@ import { getPhotobyId } from "@/app/api/photos/getPhotoById";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }) {
+export async function GET(
+  req: NextRequest,
+  {
+    params,
+  }: {
+    params: Promise<{ photoId: string }>;
+  },
+) {
   const { photoId } = await params;
   console.log("photoId in 2", photoId);
   try {

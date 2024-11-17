@@ -25,7 +25,6 @@ export const handlePhotoTitleChange = async ({
   setIsLoading,
   albumTitleFilter,
   userEmailFilter,
-  photoTitleFilter,
   filteredPhotos,
   currentUserId,
   setCurrentUserId,

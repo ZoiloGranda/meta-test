@@ -2,7 +2,14 @@ import { getUserbyId } from "@/app/api/users/getUserById";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }) {
+export async function GET(
+  req: NextRequest,
+  {
+    params,
+  }: {
+    params: Promise<{ userId: string }>;
+  },
+) {
   const { userId } = await params;
   console.log("userId", userId);
   try {
