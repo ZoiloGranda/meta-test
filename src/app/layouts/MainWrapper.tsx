@@ -160,6 +160,7 @@ const MainWrapper = () => {
           currentPage={currentPage}
           totalPages={5}
           onPageChange={handlePageChange}
+          currentResults={filteredPhotos.length}
         />
       </div>
       <div className="flex w-full justify-evenly">
