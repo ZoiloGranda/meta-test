@@ -1,4 +1,3 @@
-import { getAlbums } from "@/api/external/getAlbums";
 import { Photo } from "@/api/types/Photo";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 
@@ -72,7 +71,9 @@ export const handleUserEmailChange = async ({
   console.log("data", data);
   const userId = data.users[0].id;
   setCurrentUserId(userId);
-  const userAlbums = await getAlbums({ userId });
+  const albumResponse = await fetch(`/api/albums?userId=${userId}`);
+  const albumData = await albumResponse.json();
+  const userAlbums = albumData.albums;
   const albumIds = userAlbums.map((album) => album.id);
   if (photoTitleFilter) {
     const photosByUser = filteredPhotos.filter((photo) =>
