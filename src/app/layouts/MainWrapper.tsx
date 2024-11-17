@@ -60,57 +60,82 @@ const MainWrapper = () => {
     }
   }, [currentPage]);
 
+  const doPhotoTitleChange = async () =>
+    await handlePhotoTitleChange({
+      value: photoTitleFilter,
+      setPhotoTitleFilter,
+      setAlbumTitleFilter,
+      setFilteredPhotos,
+      setIsLoading,
+      albumTitleFilter,
+      userEmailFilter,
+      photoTitleFilter,
+      filteredPhotos,
+      currentUserId,
+      setCurrentUserId,
+      currentPage,
+      setCurrentPage,
+    });
+  useEffect(() => {
+    if (photoTitleFilter) {
+      doPhotoTitleChange();
+    }
+  }, [photoTitleFilter]);
+
   const handleFilterChange = async (filterName: string, value: string) => {
     setIsLoading(true);
     const filters = parseFilter(filterName);
     switch (filters.type) {
       case "photo":
-        await handlePhotoTitleChange({
-          value,
-          setPhotoTitleFilter,
-          setAlbumTitleFilter,
-          setFilteredPhotos,
-          setIsLoading,
-          albumTitleFilter,
-          userEmailFilter,
-          photoTitleFilter,
-          filteredPhotos,
-          currentUserId,
-          setCurrentUserId,
-        });
+        setPhotoTitleFilter(value);
+        // await handlePhotoTitleChange({
+        //   value,
+        //   setPhotoTitleFilter,
+        //   setAlbumTitleFilter,
+        //   setFilteredPhotos,
+        //   setIsLoading,
+        //   albumTitleFilter,
+        //   userEmailFilter,
+        //   photoTitleFilter,
+        //   filteredPhotos,
+        //   currentUserId,
+        //   setCurrentUserId,
+        // });
         break;
       case "album":
-        await handleAlbumTitleChange({
-          value,
-          setAlbumTitleFilter,
-          setPhotoTitleFilter,
-          setFilteredPhotos,
-          setIsLoading,
-          albumTitleFilter,
-          userEmailFilter,
-          photoTitleFilter,
-          filteredPhotos,
-          currentUserId,
-          setCurrentUserId,
-          currentPage,
-          setCurrentPage,
-        });
+        setAlbumTitleFilter(value);
+        // await handleAlbumTitleChange({
+        //   value,
+        //   setAlbumTitleFilter,
+        //   setPhotoTitleFilter,
+        //   setFilteredPhotos,
+        //   setIsLoading,
+        //   albumTitleFilter,
+        //   userEmailFilter,
+        //   photoTitleFilter,
+        //   filteredPhotos,
+        //   currentUserId,
+        //   setCurrentUserId,
+        //   currentPage,
+        //   setCurrentPage,
+        // });
         break;
       case "user":
-        handleUserEmailChange({
-          value,
-          setUserEmailFilter,
-          setPhotoTitleFilter,
-          setAlbumTitleFilter,
-          setFilteredPhotos,
-          setIsLoading,
-          albumTitleFilter,
-          userEmailFilter,
-          photoTitleFilter,
-          filteredPhotos,
-          setCurrentUserId,
-          currentUserId,
-        });
+        setUserEmailFilter(value);
+        // handleUserEmailChange({
+        //   value,
+        //   setUserEmailFilter,
+        //   setPhotoTitleFilter,
+        //   setAlbumTitleFilter,
+        //   setFilteredPhotos,
+        //   setIsLoading,
+        //   albumTitleFilter,
+        //   userEmailFilter,
+        //   photoTitleFilter,
+        //   filteredPhotos,
+        //   setCurrentUserId,
+        //   currentUserId,
+        // });
         break;
       default:
         break;

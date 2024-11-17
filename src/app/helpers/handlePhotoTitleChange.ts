@@ -3,70 +3,74 @@ import { Photo } from "@/api/types/Photo";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 
 interface HandlePhotoTitleChangeParams {
- value: string;
- setPhotoTitleFilter: (value: string) => void;
- setAlbumTitleFilter: (value: string) => void;
- setFilteredPhotos: (photos: Photo[]) => void;
- setIsLoading: (loading: boolean) => void;
- albumTitleFilter: string;
- userEmailFilter: string;
- photoTitleFilter: string;
- filteredPhotos: Photo[];
- currentUserId: number;
- setCurrentUserId: (id: number) => void;
+  value: string;
+  setPhotoTitleFilter: (value: string) => void;
+  setAlbumTitleFilter: (value: string) => void;
+  setFilteredPhotos: (photos: Photo[]) => void;
+  setIsLoading: (loading: boolean) => void;
+  albumTitleFilter: string;
+  userEmailFilter: string;
+  photoTitleFilter: string;
+  filteredPhotos: Photo[];
+  currentUserId: number;
+  setCurrentUserId: (id: number) => void;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
 }
 
 export const handlePhotoTitleChange = async ({
- value,
- setPhotoTitleFilter,
- setAlbumTitleFilter,
- setFilteredPhotos,
- setIsLoading,
- albumTitleFilter,
- userEmailFilter,
- photoTitleFilter,
- filteredPhotos,
- currentUserId,
- setCurrentUserId
+  value,
+  setPhotoTitleFilter,
+  setAlbumTitleFilter,
+  setFilteredPhotos,
+  setIsLoading,
+  albumTitleFilter,
+  userEmailFilter,
+  photoTitleFilter,
+  filteredPhotos,
+  currentUserId,
+  setCurrentUserId,
+  currentPage,
+  setCurrentPage,
 }: HandlePhotoTitleChangeParams) => {
- console.log('photo value', value)
- if (!value) {
-  setPhotoTitleFilter("");
-  if (albumTitleFilter) {
-   handleAlbumTitleChange({
-    value: albumTitleFilter,
-    setPhotoTitleFilter,
-    setAlbumTitleFilter,
-    setFilteredPhotos,
-    setIsLoading,
-    albumTitleFilter,
-    userEmailFilter,
-    photoTitleFilter: '',
-    filteredPhotos,
-    currentUserId,
-    setCurrentUserId
-   });
+  console.log("photo value", value);
+  if (!value) {
+    setPhotoTitleFilter("");
+    if (albumTitleFilter) {
+      handleAlbumTitleChange({
+        value: albumTitleFilter,
+        setPhotoTitleFilter,
+        setAlbumTitleFilter,
+        setFilteredPhotos,
+        setIsLoading,
+        albumTitleFilter,
+        userEmailFilter,
+        photoTitleFilter: "",
+        filteredPhotos,
+        currentUserId,
+        setCurrentUserId,
+      });
+    }
+    if (!albumTitleFilter && !userEmailFilter) {
+      const fetchedPhotos = await getPhotos();
+      setIsLoading(false);
+      setFilteredPhotos(fetchedPhotos);
+      return;
+    }
+    return;
   }
-  if (!albumTitleFilter && !userEmailFilter) {
-   const fetchedPhotos = await getPhotos();
-   setIsLoading(false);
-   setFilteredPhotos(fetchedPhotos);
-   return;
+  if (albumTitleFilter || userEmailFilter) {
+    const updatedPhotos = filteredPhotos.filter((photo) => {
+      return photo.title.toLowerCase().includes(value.toLowerCase());
+    });
+    setFilteredPhotos(updatedPhotos);
+    setPhotoTitleFilter(value);
+    setIsLoading(false);
+    return;
   }
-  return;
- }
- if (albumTitleFilter || userEmailFilter) {
-  const updatedPhotos = filteredPhotos.filter((photo) => {
-   return photo.title.toLowerCase().includes(value.toLowerCase())
-  })
-  setFilteredPhotos(updatedPhotos);
+  const photosByTitle = await getPhotos({ title: value });
+  console.log("photosByTitle", photosByTitle);
   setPhotoTitleFilter(value);
+  setFilteredPhotos(photosByTitle);
   setIsLoading(false);
-  return
- }
- const photosByTitle = await getPhotos({ title: value });
- console.log('photosByTitle', photosByTitle)
- setPhotoTitleFilter(value);
- setFilteredPhotos(photosByTitle);
- setIsLoading(false);
 };
