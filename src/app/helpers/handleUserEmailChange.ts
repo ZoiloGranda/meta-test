@@ -1,6 +1,6 @@
-import { Photo } from "models/Photo";
-import { handleAlbumTitleChange } from "app/helpers/handleAlbumTitleChange";
-import { Album } from "models/Album";
+import { Photo } from "@/models/Photo";
+import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
+import { Album } from "@/models/Album";
 
 interface HandleUserEmailChangeParams {
   value: string;

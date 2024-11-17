@@ -1,4 +1,4 @@
-import { getAlbumbyId } from "app/api/albums/getAlbumById";
+import { getAlbumbyId } from "@/app/api/albums/getAlbumById";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function GET(

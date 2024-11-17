@@ -1,5 +1,5 @@
-import { Album } from "models/Album";
-import { User } from "models/User";
+import { Album } from "@/models/Album";
+import { User } from "@/models/User";
 
 export interface Photo {
   albumId: number;

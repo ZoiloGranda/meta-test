@@ -1,7 +1,7 @@
 import React from "react";
-import { PhotoWithMetadata } from "models/Photo";
-import InfoSection from "app/components/InfoSection";
-import InfoItem from "app/components/InfoItem";
+import { PhotoWithMetadata } from "@/models/Photo";
+import InfoSection from "@/app/components/InfoSection";
+import InfoItem from "@/app/components/InfoItem";
 
 interface PhotoDataProps {
   photoWithMetadata: PhotoWithMetadata;

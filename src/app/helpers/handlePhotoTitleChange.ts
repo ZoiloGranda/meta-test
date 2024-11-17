@@ -1,5 +1,5 @@
-import { handleAlbumTitleChange } from "app/helpers/handleAlbumTitleChange";
-import { Photo } from "models/Photo";
+import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
+import { Photo } from "@/models/Photo";
 
 interface HandlePhotoTitleChangeParams {
   value: string;

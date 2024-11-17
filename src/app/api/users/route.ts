@@ -1,4 +1,4 @@
-import { User } from "models/User";
+import { User } from "@/models/User";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
