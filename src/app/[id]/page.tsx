@@ -1,7 +1,7 @@
 "use client";
+import PhotoData from "app/layouts/PhotoData";
+import { PhotoWithMetadata } from "models/Photo";
 import React, { useState, useEffect } from "react";
-import { PhotoWithMetadata } from "@/models/Photo";
-import PhotoData from "@/app/layouts/PhotoData";
 
 const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [isLoading, setIsLoading] = useState(true);

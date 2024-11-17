@@ -1,5 +1,5 @@
-import { User } from "@/models/User";
-import { buildAlbumsIds } from "@/app/api/photos/buildAlbumsIds";
+import { buildAlbumsIds } from "app/api/photos/buildAlbumsIds";
+import { User } from "models/User";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 

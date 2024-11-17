@@ -1,4 +1,4 @@
-import { CAMERA_LOGO_SIZE } from "@/constants";
+import { CAMERA_LOGO_SIZE } from "app/constants";
 import Image from "next/image";
 
 const CameraLogo = () => (

@@ -1,6 +1,6 @@
-import { getAlbumbyId } from "@/app/api/albums/getAlbumById";
-import { getPhotobyId } from "@/app/api/photos/getPhotoById";
-import { getUserbyId } from "@/app/api/users/getUserById";
+import { getAlbumbyId } from "app/api/albums/getAlbumById";
+import { getPhotobyId } from "app/api/photos/getPhotoById";
+import { getUserbyId } from "app/api/users/getUserById";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 

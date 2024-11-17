@@ -1,4 +1,4 @@
-import { getUserbyId } from "@/app/api/users/getUserById";
+import { getUserbyId } from "app/api/users/getUserById";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 

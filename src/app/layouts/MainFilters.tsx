@@ -1,8 +1,8 @@
 "use client";
-import InputFilter from "@/app/components/InputFilter";
+import InputFilter from "app/components/InputFilter";
+import { DEBOUNCE_DELAY } from "app/constants";
+import useDebounce from "app/hooks/useDebounce";
 import React from "react";
-import useDebounce from "@/app/hooks/useDebounce";
-import { DEBOUNCE_DELAY } from "@/constants";
 
 interface MainFiltersProps {
   onFilterChange: (filter: string, value: string) => void;

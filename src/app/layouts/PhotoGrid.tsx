@@ -1,6 +1,6 @@
+import PhotoItem from "app/components/PhotoItem";
+import { Photo } from "models/Photo";
 import React from "react";
-import { Photo } from "@/models/Photo";
-import PhotoItem from "@/app/components/PhotoItem";
 
 interface PhotoGridProps {
   photos: Photo[];

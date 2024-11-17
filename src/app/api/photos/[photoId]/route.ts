@@ -1,4 +1,4 @@
-import { getPhotobyId } from "@/app/api/photos/getPhotoById";
+import { getPhotobyId } from "app/api/photos/getPhotoById";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 

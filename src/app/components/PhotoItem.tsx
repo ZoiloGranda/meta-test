@@ -1,7 +1,7 @@
 "use client";
-import { Photo } from "@/models/Photo";
-import { getPhotoItemClasses } from "@/app/helpers/getClasses";
-import { ERROR_IMAGE, IMAGE_THUMBNAIL_SIZE } from "@/constants";
+import { ERROR_IMAGE, IMAGE_THUMBNAIL_SIZE } from "app/constants";
+import { getPhotoItemClasses } from "app/helpers/getClasses";
+import { Photo } from "models/Photo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 

@@ -1,4 +1,4 @@
-import PaginationButton from "@/app/components/PaginationButton";
+import PaginationButton from "app/components/PaginationButton";
 import React from "react";
 
 interface PaginationProps {

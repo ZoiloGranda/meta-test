@@ -1,13 +1,13 @@
 "use client";
-import { Photo } from "@/models/Photo";
-import { parseFilter } from "@/app/helpers/filterName";
-import MainFilters from "@/app/layouts/MainFilters";
-import PhotoGrid from "@/app/layouts/PhotoGrid";
 import React, { useState, useEffect } from "react";
-import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
-import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
-import { handleUserEmailChange } from "@/app/helpers/handleUserEmailChange";
-import Pagination from "@/app/components/Pagination";
+import { Photo } from "models/Photo";
+import { parseFilter } from "app/helpers/filterName";
+import MainFilters from "app/layouts/MainFilters";
+import PhotoGrid from "app/layouts/PhotoGrid";
+import { handlePhotoTitleChange } from "app/helpers/handlePhotoTitleChange";
+import { handleAlbumTitleChange } from "app/helpers/handleAlbumTitleChange";
+import { handleUserEmailChange } from "app/helpers/handleUserEmailChange";
+import Pagination from "app/components/Pagination";
 
 const MainWrapper = () => {
   const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
