@@ -16,7 +16,7 @@ const MainFilters: React.FC<MainFiltersProps> = ({ onFilterChange }) => {
       }
       debounceTimeout.current = setTimeout(() => {
         onFilterChange(filterName, value);
-      }, 300);
+      }, 400);
     },
     [onFilterChange],
   );

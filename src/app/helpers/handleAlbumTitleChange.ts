@@ -50,6 +50,8 @@ export const handleAlbumTitleChange = async ({
         filteredPhotos,
         currentUserId,
         setCurrentUserId,
+        currentPage,
+        setCurrentPage,
       });
       return;
     }

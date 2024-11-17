@@ -111,21 +111,15 @@ const MainWrapper = () => {
   };
 
   useEffect(() => {
-    if (photoTitleFilter) {
-      doPhotoTitleChange();
-    }
+    doPhotoTitleChange();
   }, [photoTitleFilter]);
 
   useEffect(() => {
-    if (albumTitleFilter) {
-      doAlbumTitleChange();
-    }
+    doAlbumTitleChange();
   }, [albumTitleFilter]);
 
   useEffect(() => {
-    if (userEmailFilter) {
-      doUserEmailChange();
-    }
+    doUserEmailChange();
   }, [userEmailFilter]);
 
   const handleFilterChange = async (filterName: string, value: string) => {
