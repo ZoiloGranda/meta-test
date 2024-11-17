@@ -1,4 +1,3 @@
-import { getAlbums } from "@/api/external/getAlbums";
 import { Photo } from "@/api/types/Photo";
 import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 
@@ -64,9 +63,12 @@ export const handleAlbumTitleChange = async ({
     }
     return;
   }
-  const filteredAlbums = userEmailFilter
-    ? await getAlbums({ title: value, userId: currentUserId })
-    : await getAlbums({ title: value });
+  const url = userEmailFilter
+    ? `/api/albums?title=${encodeURIComponent(value)}&userId=${currentUserId}`
+    : `/api/albums?title=${encodeURIComponent(value)}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  const filteredAlbums = data.albums;
   const albumIds = filteredAlbums.map((album) => album.id);
   const albumPhotos = photoTitleFilter
     ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))

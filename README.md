@@ -28,7 +28,13 @@ explain why i used nextjs
 explain why the pagination doesnt get all the data
 add api types to api responses
 handle all empty fitlers in a single place
-send to first page on filter change
+```bash
+use single function to make api requests
+      const response = await fetch(
+        `/api/photos?start=${(currentPage - 1) * 25}`,
+      );
+```
+set to first page on filter change
 ```bash
 use single function to parse URLSearchParams
     const params = new URLSearchParams({
