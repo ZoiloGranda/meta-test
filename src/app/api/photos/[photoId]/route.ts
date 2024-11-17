@@ -2,12 +2,11 @@ import { Photo } from "@/api/types/Photo";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-  const searchParams = req.nextUrl.searchParams;
-  const id = searchParams.get("id");
+export async function GET(req: NextRequest, { params }) {
+  const { photoId } = await params;
   try {
     const response = await fetch(
-      `https://jsonplaceholder.typicode.com/photos/${id}`,
+      `https://jsonplaceholder.typicode.com/photos/${photoId}`,
     );
 
     if (!response.ok) {
