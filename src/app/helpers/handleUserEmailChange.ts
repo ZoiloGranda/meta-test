@@ -1,5 +1,4 @@
 import { getAlbums } from "@/api/external/getAlbums";
-import { getPhotos } from "@/api/external/getPhotos";
 import { Photo } from "@/api/types/Photo";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 
@@ -59,7 +58,9 @@ export const handleUserEmailChange = async ({
     }
 
     if (!photoTitleFilter && !albumTitleFilter) {
-      const fetchedPhotos = await getPhotos();
+      const response = await fetch("/api/photos");
+      const data = await response.json();
+      const fetchedPhotos = data.photos;
       setIsLoading(false);
       setFilteredPhotos(fetchedPhotos);
       return;
@@ -82,10 +83,12 @@ export const handleUserEmailChange = async ({
     setIsLoading(false);
     return;
   }
-  const userPhotos = await getPhotos({
-    albumId: albumIds,
-    start: (currentPage - 1) * 25,
-  });
+  const photosResponse = await fetch(
+    `/api/photos?albumId=${albumIds}&start=${(currentPage - 1) * 25}`,
+  );
+  const photosData = await photosResponse.json();
+  const userPhotos = photosData.photos;
+
   setUserEmailFilter(value);
   setFilteredPhotos(userPhotos);
   setIsLoading(false);
