@@ -1,7 +1,7 @@
 "use client";
 import { Photo } from "@/api/types/Photo";
 import { getPhotoItemClasses } from "@/app/helpers/getClasses";
-import { ERROR_IMAGE } from "@/constants";
+import { ERROR_IMAGE, IMAGE_THUMBNAIL_SIZE } from "@/constants";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -33,12 +33,11 @@ const PhotoItem: React.FC<PhotoItemProps> = ({ photo }) => {
       <Link href={`/${photo.id}`}>
         <img
           ref={image}
-          key={photo.id}
           src={photoSrc}
           alt={photo.title}
           className={imgClasses}
-          width={128}
-          height={128}
+          width={IMAGE_THUMBNAIL_SIZE.width}
+          height={IMAGE_THUMBNAIL_SIZE.height}
           onLoad={onLoadEvent}
           onError={onErrorEvent}
         />
