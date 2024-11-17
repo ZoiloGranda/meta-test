@@ -15,7 +15,9 @@ export async function getPhotoWithMetadata(
     );
     const albumData = await albumResponse.json();
     const album = albumData.album;
-    const user = await getUserById(album.userId);
+    const userResponse = await fetch(`/api/users/${album.userId}`);
+    const userData = await userResponse.json();
+    const { user } = userData;
     return {
       ...photo,
       album: {
