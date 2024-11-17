@@ -43,27 +43,15 @@ const MainWrapper = () => {
     }
     if (photoTitleFilter) {
       doPhotoTitleChange();
+      return;
     }
     if (albumTitleFilter) {
-      handleAlbumTitleChange({
-        value: albumTitleFilter,
-        setPhotoTitleFilter,
-        setAlbumTitleFilter,
-        setFilteredPhotos,
-        setIsLoading,
-        albumTitleFilter,
-        userEmailFilter,
-        photoTitleFilter,
-        filteredPhotos,
-        currentUserId,
-        setCurrentUserId,
-        currentPage,
-        setCurrentPage,
-      });
+      doAlbumTitleChange();
+      return;
     }
   }, [currentPage]);
 
-  const doPhotoTitleChange = async () =>
+  const doPhotoTitleChange = async () => {
     await handlePhotoTitleChange({
       value: photoTitleFilter,
       setPhotoTitleFilter,
@@ -79,11 +67,37 @@ const MainWrapper = () => {
       currentPage,
       setCurrentPage,
     });
+  };
+
+  const doAlbumTitleChange = async () => {
+    handleAlbumTitleChange({
+      value: albumTitleFilter,
+      setPhotoTitleFilter,
+      setAlbumTitleFilter,
+      setFilteredPhotos,
+      setIsLoading,
+      albumTitleFilter,
+      userEmailFilter,
+      photoTitleFilter,
+      filteredPhotos,
+      currentUserId,
+      setCurrentUserId,
+      currentPage,
+      setCurrentPage,
+    });
+  };
+
   useEffect(() => {
     if (photoTitleFilter) {
       doPhotoTitleChange();
     }
   }, [photoTitleFilter]);
+
+  useEffect(() => {
+    if (albumTitleFilter) {
+      doAlbumTitleChange();
+    }
+  }, [albumTitleFilter]);
 
   const handleFilterChange = async (filterName: string, value: string) => {
     setIsLoading(true);
