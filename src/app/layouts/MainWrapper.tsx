@@ -25,9 +25,11 @@ const MainWrapper = () => {
   const fetchPhotos = async () => {
     setIsLoading(true);
     try {
-      const photos = await getPhotos({
-        start: (currentPage - 1) * 25,
-      });
+      const response = await fetch(
+        `/api/photos?start=${(currentPage - 1) * 25}`,
+      );
+      const data = await response.json();
+      const photos = data.photos;
       setFilteredPhotos(photos);
     } catch (error) {
       console.error("Error fetching photos:", error);
