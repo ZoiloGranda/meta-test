@@ -70,10 +70,12 @@ export const handlePhotoTitleChange = async ({
     setIsLoading(false);
     return;
   }
-  const photosByTitle = await getPhotos({
-    title: value,
-    start: (currentPage - 1) * 25,
-  });
+
+  const response = await fetch(
+    `/api/photos?title=${encodeURIComponent(value)}&start=${(currentPage - 1) * 25}`,
+  );
+  const data = await response.json();
+  const photosByTitle = data.photos;
   console.log("photosByTitle", photosByTitle);
   setPhotoTitleFilter(value);
   setFilteredPhotos(photosByTitle);

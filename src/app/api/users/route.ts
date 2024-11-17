@@ -1,4 +1,3 @@
-// pages/api/getUsers.ts
 import { User } from "@/api/types/User";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";

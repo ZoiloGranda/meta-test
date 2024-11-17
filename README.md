@@ -27,6 +27,14 @@ handle total pages in pagination
 explain why i used nextjs
 explain why the pagination doesnt get all the data
 add api types to api responses
+use single function to parse URLSearchParams
+```bash
+    const params = new URLSearchParams({
+      ...(start ? { _start: String(start) } : { _start: "0" }),
+      ...(limit ? { _limit: String(limit) } : { _limit: "25" }),
+      ...(email ? { email } : {}),
+    });
+```
 
 ## Getting Started
 
