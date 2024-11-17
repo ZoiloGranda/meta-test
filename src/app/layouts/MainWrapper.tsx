@@ -49,6 +49,10 @@ const MainWrapper = () => {
       doAlbumTitleChange();
       return;
     }
+    if (userEmailFilter) {
+      doUserEmailChange();
+      return;
+    }
   }, [currentPage]);
 
   const doPhotoTitleChange = async () => {
