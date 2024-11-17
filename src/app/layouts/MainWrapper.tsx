@@ -8,7 +8,6 @@ import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 import { handleUserEmailChange } from "@/app/helpers/handleUserEmailChange";
 import Pagination from "@/app/components/Pagination";
-import { getPhotos } from "@/api/external/getPhotos";
 
 const MainWrapper = () => {
   const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);

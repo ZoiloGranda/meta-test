@@ -54,7 +54,9 @@ export const handlePhotoTitleChange = async ({
       });
     }
     if (!albumTitleFilter && !userEmailFilter) {
-      const fetchedPhotos = await getPhotos();
+      const response = await fetch("/api/photos");
+      const data = await response.json();
+      const fetchedPhotos = data.photos;
       setIsLoading(false);
       setFilteredPhotos(fetchedPhotos);
       return;
