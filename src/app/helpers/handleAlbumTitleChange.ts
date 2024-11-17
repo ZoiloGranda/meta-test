@@ -1,5 +1,4 @@
 import { getAlbums } from "@/api/external/getAlbums";
-import { getPhotos } from "@/api/external/getPhotos";
 import { Photo } from "@/api/types/Photo";
 import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 
@@ -69,15 +68,17 @@ export const handleAlbumTitleChange = async ({
     ? await getAlbums({ title: value, userId: currentUserId })
     : await getAlbums({ title: value });
   const albumIds = filteredAlbums.map((album) => album.id);
-  console.log("albumIds ", albumIds);
-  const albumPhotosPromises = photoTitleFilter
+  const albumPhotos = photoTitleFilter
     ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))
-    : await getPhotos({
-        albumId: albumIds,
-        start: (currentPage - 1) * 25,
-      });
-  console.log("photoTitleFilter ", photoTitleFilter);
+    : await (async () => {
+        const response = await fetch(
+          `/api/photos?albumId=${albumIds}&start=${(currentPage - 1) * 25}`,
+        );
+        const data = await response.json();
+        console.log("data ", data);
+        return data.photos as Photo[];
+      })();
   setAlbumTitleFilter(value);
-  setFilteredPhotos(albumPhotosPromises);
+  setFilteredPhotos(albumPhotos);
   setIsLoading(false);
 };

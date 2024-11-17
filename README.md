@@ -37,6 +37,19 @@ use single function to parse URLSearchParams
       ...(email ? { email } : {}),
     });
 ```
+```bash
+src/app/helpers/handleAlbumTitleChange.ts
+  const albumPhotos = photoTitleFilter
+    ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))
+    : await (async () => {
+        const response = await fetch(
+          `/api/photos?albumId=${albumIds}&start=${(currentPage - 1) * 25}`,
+        );
+        const data = await response.json();
+        console.log("data ", data);
+        return data.photos as Photo[];
+      })();
+```
 
 ## Getting Started
 
