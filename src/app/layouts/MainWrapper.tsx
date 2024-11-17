@@ -158,7 +158,6 @@ const MainWrapper = () => {
       <div className="flex w-full justify-evenly">
         <Pagination
           currentPage={currentPage}
-          totalPages={5}
           onPageChange={handlePageChange}
           currentResults={filteredPhotos.length}
         />
