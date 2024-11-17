@@ -1,6 +1,5 @@
 import { PhotoWithMetadata } from "@/api/types/Photo";
 import { getPhotoById } from "@/api/external/getPhotoById";
-import { getAlbumById } from "@/api/external/getAlbumById";
 import { getUserById } from "@/api/external/getUserById";
 
 export async function getPhotoWithMetadata(
@@ -8,7 +7,11 @@ export async function getPhotoWithMetadata(
 ): Promise<PhotoWithMetadata> {
   try {
     const photo = await getPhotoById(photoId);
-    const album = await getAlbumById(photo.albumId);
+    const albumResponse = await fetch(
+      `/api/albumid?id=${encodeURIComponent(photo.albumId)}`,
+    );
+    const albumData = await albumResponse.json();
+    const album = albumData.album;
     const user = await getUserById(album.userId);
     return {
       ...photo,
