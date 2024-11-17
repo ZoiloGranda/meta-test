@@ -87,6 +87,25 @@ const MainWrapper = () => {
     });
   };
 
+  const doUserEmailChange = async () => {
+    handleUserEmailChange({
+      value: userEmailFilter,
+      setPhotoTitleFilter,
+      setAlbumTitleFilter,
+      setFilteredPhotos,
+      setIsLoading,
+      albumTitleFilter,
+      userEmailFilter,
+      photoTitleFilter,
+      filteredPhotos,
+      currentUserId,
+      setCurrentUserId,
+      currentPage,
+      setCurrentPage,
+      setUserEmailFilter,
+    });
+  };
+
   useEffect(() => {
     if (photoTitleFilter) {
       doPhotoTitleChange();
@@ -99,60 +118,24 @@ const MainWrapper = () => {
     }
   }, [albumTitleFilter]);
 
+  useEffect(() => {
+    if (userEmailFilter) {
+      doUserEmailChange();
+    }
+  }, [userEmailFilter]);
+
   const handleFilterChange = async (filterName: string, value: string) => {
     setIsLoading(true);
     const filters = parseFilter(filterName);
     switch (filters.type) {
       case "photo":
         setPhotoTitleFilter(value);
-        // await handlePhotoTitleChange({
-        //   value,
-        //   setPhotoTitleFilter,
-        //   setAlbumTitleFilter,
-        //   setFilteredPhotos,
-        //   setIsLoading,
-        //   albumTitleFilter,
-        //   userEmailFilter,
-        //   photoTitleFilter,
-        //   filteredPhotos,
-        //   currentUserId,
-        //   setCurrentUserId,
-        // });
         break;
       case "album":
         setAlbumTitleFilter(value);
-        // await handleAlbumTitleChange({
-        //   value,
-        //   setAlbumTitleFilter,
-        //   setPhotoTitleFilter,
-        //   setFilteredPhotos,
-        //   setIsLoading,
-        //   albumTitleFilter,
-        //   userEmailFilter,
-        //   photoTitleFilter,
-        //   filteredPhotos,
-        //   currentUserId,
-        //   setCurrentUserId,
-        //   currentPage,
-        //   setCurrentPage,
-        // });
         break;
       case "user":
         setUserEmailFilter(value);
-        // handleUserEmailChange({
-        //   value,
-        //   setUserEmailFilter,
-        //   setPhotoTitleFilter,
-        //   setAlbumTitleFilter,
-        //   setFilteredPhotos,
-        //   setIsLoading,
-        //   albumTitleFilter,
-        //   userEmailFilter,
-        //   photoTitleFilter,
-        //   filteredPhotos,
-        //   setCurrentUserId,
-        //   currentUserId,
-        // });
         break;
       default:
         break;
