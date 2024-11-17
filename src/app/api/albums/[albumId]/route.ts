@@ -1,8 +1,11 @@
 import { getAlbumbyId } from "@/app/api/albums/getAlbumById";
-import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }) {
+export async function GET({
+  params,
+}: {
+  params: Promise<{ albumId: string }>;
+}) {
   const { albumId } = await params;
   try {
     const album = await getAlbumbyId({ albumId });
