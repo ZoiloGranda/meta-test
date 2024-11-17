@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const Footer = () => {
   return (
     <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">

@@ -7,3 +7,4 @@ export const CAMERA_LOGO_SIZE = {
   width: 256,
   height: 256,
 };
+export const DEBOUNCE_DELAY = 400;
