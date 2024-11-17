@@ -1,96 +1,67 @@
 import React from "react";
 import { PhotoWithMetadata } from "@/api/types/Photo";
+import InfoSection from "@/app/components/InfoSection";
+import InfoItem from "@/app/components/InfoItem";
 
 interface PhotoDataProps {
   photoWithMetadata: PhotoWithMetadata;
 }
 
-const PhotoData: React.FC<PhotoDataProps> = ({ photoWithMetadata }) => (
-  <div className="flex flex-col">
-    <h2 className="mb-4 text-2xl font-bold">Photo Details</h2>
-    <p>
-      <strong>ID:</strong> {photoWithMetadata.id}
-    </p>
-    <p>
-      <strong>Title:</strong> {photoWithMetadata.title}
-    </p>
-    <p>
-      <strong>URL:</strong> {photoWithMetadata.url}
-    </p>
-    <p>
-      <strong>Thumbnail URL:</strong> {photoWithMetadata.thumbnailUrl}
-    </p>
+const PhotoData: React.FC<PhotoDataProps> = ({ photoWithMetadata }) => {
+  const { album } = photoWithMetadata;
+  const { user } = album;
+  const { address, company } = user;
 
-    <h3 className="mb-2 mt-6 text-xl font-semibold">Album Details</h3>
-    <p>
-      <strong>Album ID:</strong> {photoWithMetadata.album.id}
-    </p>
-    <p>
-      <strong>Title:</strong> {photoWithMetadata.album.title}
-    </p>
-    <p>
-      <strong>User ID:</strong> {photoWithMetadata.album.userId}
-    </p>
+  return (
+    <div className="flex flex-col">
+      <InfoSection title="Photo Details" level="h2">
+        <InfoItem label="ID" value={photoWithMetadata.id} />
+        <InfoItem label="Title" value={photoWithMetadata.title} />
+        <InfoItem label="URL" value={photoWithMetadata.url} />
+        <InfoItem
+          label="Thumbnail URL"
+          value={photoWithMetadata.thumbnailUrl}
+        />
+      </InfoSection>
 
-    <h3 className="mb-2 mt-6 text-xl font-semibold">User Details</h3>
-    <p>
-      <strong>ID:</strong> {photoWithMetadata.album.user.id}
-    </p>
-    <p>
-      <strong>Name:</strong> {photoWithMetadata.album.user.name}
-    </p>
-    <p>
-      <strong>Username:</strong> {photoWithMetadata.album.user.username}
-    </p>
-    <p>
-      <strong>Email:</strong> {photoWithMetadata.album.user.email}
-    </p>
-    <p>
-      <strong>Phone:</strong> {photoWithMetadata.album.user.phone}
-    </p>
-    <p>
-      <strong>Website:</strong> {photoWithMetadata.album.user.website}
-    </p>
+      <InfoSection title="Album Details" level="h3">
+        <InfoItem label="Album ID" value={album.id} />
+        <InfoItem label="Title" value={album.title} />
+        <InfoItem label="User ID" value={album.userId} />
+      </InfoSection>
 
-    <h4 className="mb-1 mt-4 text-lg font-medium">Address</h4>
-    <p>
-      <strong>Street:</strong> {photoWithMetadata.album.user.address.street}
-    </p>
-    <p>
-      <strong>Suite:</strong> {photoWithMetadata.album.user.address.suite}
-    </p>
-    <p>
-      <strong>City:</strong> {photoWithMetadata.album.user.address.city}
-    </p>
-    <p>
-      <strong>Zipcode:</strong> {photoWithMetadata.album.user.address.zipcode}
-    </p>
-    <p>
-      <strong>Geo:</strong>
-    </p>
-    <ul>
-      <li>
-        <strong>Latitude:</strong>{" "}
-        {photoWithMetadata.album.user.address.geo.lat}
-      </li>
-      <li>
-        <strong>Longitude:</strong>{" "}
-        {photoWithMetadata.album.user.address.geo.lng}
-      </li>
-    </ul>
+      <InfoSection title="User Details" level="h3">
+        <InfoItem label="ID" value={user.id} />
+        <InfoItem label="Name" value={user.name} />
+        <InfoItem label="Username" value={user.username} />
+        <InfoItem label="Email" value={user.email} />
+        <InfoItem label="Phone" value={user.phone} />
+        <InfoItem label="Website" value={user.website} />
+      </InfoSection>
 
-    <h4 className="mb-1 mt-4 text-lg font-medium">Company</h4>
-    <p>
-      <strong>Name:</strong> {photoWithMetadata.album.user.company.name}
-    </p>
-    <p>
-      <strong>Catch Phrase:</strong>{" "}
-      {photoWithMetadata.album.user.company.catchPhrase}
-    </p>
-    <p>
-      <strong>BS:</strong> {photoWithMetadata.album.user.company.bs}
-    </p>
-  </div>
-);
+      <InfoSection title="Address" level="h4">
+        <InfoItem label="Street" value={address.street} />
+        <InfoItem label="Suite" value={address.suite} />
+        <InfoItem label="City" value={address.city} />
+        <InfoItem label="Zipcode" value={address.zipcode} />
+        <strong>Geo:</strong>
+        <ul>
+          <li>
+            <strong>Latitude:</strong> {address.geo.lat}
+          </li>
+          <li>
+            <strong>Longitude:</strong> {address.geo.lng}
+          </li>
+        </ul>
+      </InfoSection>
+
+      <InfoSection title="Company" level="h4">
+        <InfoItem label="Name" value={company.name} />
+        <InfoItem label="Catch Phrase" value={company.catchPhrase} />
+        <InfoItem label="BS" value={company.bs} />
+      </InfoSection>
+    </div>
+  );
+};
 
 export default PhotoData;
