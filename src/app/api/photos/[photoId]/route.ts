@@ -1,22 +1,16 @@
-import { Photo } from "@/api/types/Photo";
+import { getPhotobyId } from "@/app/api/photos/getPhotoById";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, { params }) {
   const { photoId } = await params;
+  console.log("photoId in 2", photoId);
   try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/photos/${photoId}`,
-    );
-
-    if (!response.ok) {
-      throw new Error("Photo by id response was not ok");
-    }
-    const photo: Photo = await response.json();
+    const photo = await getPhotobyId({ photoId });
     return NextResponse.json({ photo }, { status: 200 });
   } catch {
     return NextResponse.json(
-      { error: "Failed to fetch Photo by id" },
+      { error: "Failed to fetch photo metadata" },
       { status: 500 },
     );
   }
