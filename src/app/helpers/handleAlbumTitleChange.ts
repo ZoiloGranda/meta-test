@@ -63,26 +63,18 @@ export const handleAlbumTitleChange = async ({
     }
     return;
   }
-  let filteredAlbums = [];
-  if (userEmailFilter) {
-    filteredAlbums = await getAlbums({ title: value, userId: currentUserId });
-  } else {
-    filteredAlbums = await getAlbums({
-      title: value,
-    });
-  }
+  const filteredAlbums = userEmailFilter
+    ? await getAlbums({ title: value, userId: currentUserId })
+    : await getAlbums({ title: value });
   const albumIds = filteredAlbums.map((album) => album.id);
   console.log("albumIds ", albumIds);
-  let albumPhotosPromises = await getPhotos({
-    albumId: albumIds,
-    start: (currentPage - 1) * 25,
-  });
+  const albumPhotosPromises = photoTitleFilter
+    ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))
+    : await getPhotos({
+        albumId: albumIds,
+        start: (currentPage - 1) * 25,
+      });
   console.log("photoTitleFilter ", photoTitleFilter);
-  if (photoTitleFilter) {
-    albumPhotosPromises = filteredPhotos.filter((photo) =>
-      albumIds.includes(photo.albumId),
-    );
-  }
   setAlbumTitleFilter(value);
   setFilteredPhotos(albumPhotosPromises);
   setIsLoading(false);
