@@ -31,7 +31,8 @@ export const handleAlbumTitleChange = async ({
  filteredPhotos,
  currentUserId,
  setCurrentUserId,
- currentPage
+ currentPage,
+ setCurrentPage
 }: HandleAlbumTitleChangeParams) => {
  console.log('album value', value)
  if (!value) {

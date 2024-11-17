@@ -26,7 +26,6 @@ const MainWrapper = () => {
     setIsLoading(true);
     try {
       const photos = await getPhotos({
-        limit: 25,
         start: (currentPage - 1) * 25,
       });
       setFilteredPhotos(photos);
@@ -42,22 +41,23 @@ const MainWrapper = () => {
       fetchPhotos();
       return;
     }
-    if (!albumTitleFilter) return;
-    handleAlbumTitleChange({
-      value: albumTitleFilter,
-      setPhotoTitleFilter,
-      setAlbumTitleFilter,
-      setFilteredPhotos,
-      setIsLoading,
-      albumTitleFilter,
-      userEmailFilter,
-      photoTitleFilter,
-      filteredPhotos,
-      currentUserId,
-      setCurrentUserId,
-      currentPage,
-      setCurrentPage,
-    });
+    if (albumTitleFilter) {
+      handleAlbumTitleChange({
+        value: albumTitleFilter,
+        setPhotoTitleFilter,
+        setAlbumTitleFilter,
+        setFilteredPhotos,
+        setIsLoading,
+        albumTitleFilter,
+        userEmailFilter,
+        photoTitleFilter,
+        filteredPhotos,
+        currentUserId,
+        setCurrentUserId,
+        currentPage,
+        setCurrentPage,
+      });
+    }
   }, [currentPage]);
 
   const handleFilterChange = async (filterName: string, value: string) => {
