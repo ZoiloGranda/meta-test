@@ -41,6 +41,9 @@ const MainWrapper = () => {
       fetchPhotos();
       return;
     }
+    if (photoTitleFilter) {
+      doPhotoTitleChange();
+    }
     if (albumTitleFilter) {
       handleAlbumTitleChange({
         value: albumTitleFilter,

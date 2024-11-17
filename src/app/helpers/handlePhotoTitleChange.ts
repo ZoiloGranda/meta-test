@@ -68,7 +68,10 @@ export const handlePhotoTitleChange = async ({
     setIsLoading(false);
     return;
   }
-  const photosByTitle = await getPhotos({ title: value });
+  const photosByTitle = await getPhotos({
+    title: value,
+    start: (currentPage - 1) * 25,
+  });
   console.log("photosByTitle", photosByTitle);
   setPhotoTitleFilter(value);
   setFilteredPhotos(photosByTitle);
