@@ -27,6 +27,7 @@ handle total pages in pagination
 explain why i used nextjs
 explain why the pagination doesnt get all the data
 add api types to api responses
+handle all empty fitlers in a single place
 send to first page on filter change
 ```bash
 use single function to parse URLSearchParams

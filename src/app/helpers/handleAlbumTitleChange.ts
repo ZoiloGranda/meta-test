@@ -56,9 +56,11 @@ export const handleAlbumTitleChange = async ({
       return;
     }
     if (!photoTitleFilter && !userEmailFilter) {
-      const fetchedPhotos = await getPhotos();
-      setIsLoading(false);
+      const response = await fetch("/api/photos");
+      const data = await response.json();
+      const fetchedPhotos = data.photos;
       setFilteredPhotos(fetchedPhotos);
+      setIsLoading(false);
       return;
     }
     return;

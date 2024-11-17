@@ -1,4 +1,3 @@
-import { getPhotos } from "@/api/external/getPhotos";
 import { Photo } from "@/api/types/Photo";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 
