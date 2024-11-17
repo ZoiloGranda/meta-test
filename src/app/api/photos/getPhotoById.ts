@@ -1,4 +1,4 @@
-import { Photo } from "@/api/types/Photo";
+import { Photo } from "@/models/Photo";
 
 export async function getPhotobyId({ photoId }: { photoId: string }) {
   try {

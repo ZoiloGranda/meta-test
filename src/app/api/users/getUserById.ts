@@ -1,4 +1,4 @@
-import { User } from "@/api/types/User";
+import { User } from "@/models/User";
 
 export async function getUserbyId({ userId }: { userId: string }) {
   try {

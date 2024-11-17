@@ -1,4 +1,4 @@
-import { Photo } from "@/api/types/Photo";
+import { Photo } from "@/models/Photo";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 
 interface HandleUserEmailChangeParams {

@@ -1,4 +1,4 @@
-import { Album } from "@/api/types/Album";
+import { Album } from "@/models/Album";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 

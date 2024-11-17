@@ -1,5 +1,5 @@
 "use client";
-import { Photo } from "@/api/types/Photo";
+import { Photo } from "@/models/Photo";
 import { getPhotoItemClasses } from "@/app/helpers/getClasses";
 import { ERROR_IMAGE, IMAGE_THUMBNAIL_SIZE } from "@/constants";
 import Link from "next/link";

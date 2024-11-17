@@ -1,4 +1,4 @@
-import { Album } from "@/api/types/Album";
+import { Album } from "@/models/Album";
 
 export async function getAlbumbyId({ albumId }: { albumId: string }) {
   try {

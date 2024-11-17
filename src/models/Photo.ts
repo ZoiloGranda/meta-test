@@ -1,5 +1,5 @@
-import { Album } from "@/api/types/Album";
-import { User } from "@/api/types/User";
+import { Album } from "@/models/Album";
+import { User } from "@/models/User";
 
 export interface Photo {
   albumId: number;

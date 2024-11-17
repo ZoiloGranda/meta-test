@@ -1,4 +1,4 @@
-import { Photo } from "@/api/types/Photo";
+import { Photo } from "@/models/Photo";
 import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 
 interface HandleAlbumTitleChangeParams {

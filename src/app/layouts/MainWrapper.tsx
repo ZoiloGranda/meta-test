@@ -1,5 +1,5 @@
 "use client";
-import { Photo } from "@/api/types/Photo";
+import { Photo } from "@/models/Photo";
 import { parseFilter } from "@/app/helpers/filterName";
 import MainFilters from "@/app/layouts/MainFilters";
 import PhotoGrid from "@/app/layouts/PhotoGrid";

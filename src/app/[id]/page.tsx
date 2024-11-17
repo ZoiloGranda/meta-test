@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { PhotoWithMetadata } from "@/api/types/Photo";
+import { PhotoWithMetadata } from "@/models/Photo";
 import PhotoData from "@/app/layouts/PhotoData";
 
 const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
