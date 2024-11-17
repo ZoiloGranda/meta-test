@@ -26,6 +26,7 @@ move HandleAlbumTitleChangeParams to common params
 handle total pages in pagination
 explain why i used nextjs
 explain why the pagination doesnt get all the data
+add api types to api responses
 
 ## Getting Started
 
