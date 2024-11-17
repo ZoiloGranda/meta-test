@@ -10,10 +10,9 @@ interface PhotoGridProps {
 const PhotoGrid: React.FC<PhotoGridProps> = ({ photos, isLoading }) => {
   return (
     <div className="flex w-full flex-wrap justify-center gap-2">
-      {isLoading && (
+      {isLoading ? (
         <div className="loader h-32 w-32 justify-items-center object-cover"></div>
-      )}
-      {!isLoading && (
+      ) : (
         <>
           {photos.map((photo) => (
             <PhotoItem key={photo.id} photo={photo} />
