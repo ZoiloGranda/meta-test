@@ -14,7 +14,7 @@ https://meta-test-ashy.vercel.app/
 
 ## CI/CD 
 
-There is a short CI/CD pipeline setup using Vercel. The pipeline is triggered on every push to the main branch. The pipeline runs the following operations:
+There is a short CI/CD pipeline setup using Vercel, which deploys the project. [See Deployments](https://github.com/ZoiloGranda/meta-test/deployments). The pipeline is triggered on every push to the main branch. It runs the following operations:
 
 ```bash
 git clone
