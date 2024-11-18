@@ -17,6 +17,7 @@ const MainFilters: React.FC<MainFiltersProps> = ({ onFilterChange }) => {
         <InputFilter
           label="Photo Title"
           filterName="photo.title"
+          type="text"
           onFilterChange={debounce}
         />
       </div>
@@ -24,6 +25,7 @@ const MainFilters: React.FC<MainFiltersProps> = ({ onFilterChange }) => {
         <InputFilter
           label="Album Title"
           filterName="album.title"
+          type="text"
           onFilterChange={debounce}
         />
       </div>
@@ -31,6 +33,7 @@ const MainFilters: React.FC<MainFiltersProps> = ({ onFilterChange }) => {
         <InputFilter
           label="User Email"
           filterName="user.email"
+          type="email"
           onFilterChange={debounce}
         />
       </div>
