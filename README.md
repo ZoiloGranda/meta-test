@@ -1,12 +1,10 @@
 ## To Do
 
-paginate album should not request album data again when changing pages, only photo data
-pagination
 Toast for errors
 tests
 ci/cd
 show all metadata for current batch
-
+error when email not found
 ```bash
 clean classes in
 const imgClasses = isLoading

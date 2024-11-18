@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Photo } from "@/models/Photo";
 import { parseFilter } from "@/app/helpers/filterName";
 import MainFilters from "@/app/layouts/MainFilters";
@@ -18,6 +18,7 @@ const MainWrapper = () => {
   const [albumTitleFilter, setAlbumTitleFilter] = useState("");
   const [userEmailFilter, setUserEmailFilter] = useState("");
   const [currentUserId, setCurrentUserId] = useState(0);
+  const [initFilters, setInitFilters] = useState(false);
 
   const emptyFilters =
     !photoTitleFilter && !albumTitleFilter && !userEmailFilter;
@@ -120,16 +121,23 @@ const MainWrapper = () => {
   };
 
   useEffect(() => {
+    if (!initFilters) return;
     doPhotoTitleChange({ pageChanged: false });
   }, [photoTitleFilter]);
 
   useEffect(() => {
+    if (!initFilters) return;
     doAlbumTitleChange();
   }, [albumTitleFilter]);
 
   useEffect(() => {
+    if (!initFilters) return;
     doUserEmailChange();
   }, [userEmailFilter]);
+
+  useEffect(() => {
+    setInitFilters(true);
+  }, [initFilters]);
 
   const handleFilterChange = async (filterName: string, value: string) => {
     setIsLoading(true);
