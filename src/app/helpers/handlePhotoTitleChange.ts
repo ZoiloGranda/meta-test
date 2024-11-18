@@ -10,17 +10,12 @@ export const handlePhotoTitleChange = async (
   const {
     value,
     setPhotoTitleFilter,
-    setAlbumTitleFilter,
     setFilteredPhotos,
     setIsLoading,
     albumTitleFilter,
     userEmailFilter,
     filteredPhotos,
-    currentUserId,
-    setCurrentUserId,
     currentPage,
-    setCurrentPage,
-    setUserEmailFilter,
     pageChanged = false,
   } = params;
 

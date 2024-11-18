@@ -10,18 +10,13 @@ export const handleAlbumTitleChange = async (
   const {
     value,
     setAlbumTitleFilter,
-    setPhotoTitleFilter,
     setFilteredPhotos,
     setIsLoading,
-    albumTitleFilter,
     userEmailFilter,
     photoTitleFilter,
     filteredPhotos,
     currentUserId,
-    setCurrentUserId,
     currentPage,
-    setCurrentPage,
-    setUserEmailFilter,
   } = params;
 
   console.log("album value", value);

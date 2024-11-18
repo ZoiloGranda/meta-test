@@ -11,18 +11,13 @@ export const handleUserEmailChange = async (
   const {
     value,
     setUserEmailFilter,
-    setPhotoTitleFilter,
-    setAlbumTitleFilter,
     setFilteredPhotos,
     setIsLoading,
     albumTitleFilter,
-    userEmailFilter,
     photoTitleFilter,
     filteredPhotos,
-    currentUserId,
     setCurrentUserId,
     currentPage,
-    setCurrentPage,
     pageChanged = false,
   } = params;
 
@@ -47,11 +42,6 @@ export const handleUserEmailChange = async (
     }
     return;
   }
-
-  const baseParams = {
-    ...params,
-    userEmailFilter: value,
-  };
 
   const user: User = await fetchData(
     `/api/users?email=${encodeURIComponent(value)}`,
