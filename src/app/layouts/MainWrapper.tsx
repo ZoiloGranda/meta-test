@@ -34,7 +34,7 @@ const MainWrapper = () => {
       );
       setFilteredPhotos(photos);
     } catch (error) {
-      console.error("Error fetching photos:", error);
+      throw new Error("Failed to fetch photos");
     } finally {
       setIsLoading(false);
     }

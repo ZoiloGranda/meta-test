@@ -31,7 +31,6 @@ export async function getPhotosRouteHandler({
     const photoIdsParams =
       photoIds && photoIds.length > 0 ? buildPhotoIds(photoIds) : "";
     const url = `${API_URL}/photos?${params.toString()}${albumIdsParams}${photoIdsParams}`;
-    console.log("url", url);
     const response = await fetch(url);
 
     if (!response.ok) {
