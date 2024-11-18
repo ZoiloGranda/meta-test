@@ -15,11 +15,9 @@ export async function GET(req: NextRequest) {
     const params = new URLSearchParams({
       ...(start ? { _start: String(start) } : { _start: "0" }),
       ...(limit ? { _limit: String(limit) } : { _limit: String(PAGE_LIMIT) }),
-      ...(email ? { email } : {}),
+      ...(email ? { email_like: email } : {}),
     });
-
     const response = await fetch(`${API_URL}/users?${params.toString()}`);
-
     if (!response.ok) {
       throw new Error("Users response was not ok");
     }
