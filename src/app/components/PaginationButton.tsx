@@ -6,6 +6,14 @@ interface PaginationButtonProps {
   onPageChange: (page: number) => void;
 }
 
+const getButtonClass = (currentPage: number, page: number): string => {
+  return `rounded-md px-3 py-1 ${
+    currentPage === page
+      ? "bg-blue-700 text-white"
+      : "bg-blue-500 text-white hover:bg-blue-600"
+  }`;
+};
+
 const PaginationButton: React.FC<PaginationButtonProps> = ({
   page,
   currentPage,
@@ -15,7 +23,7 @@ const PaginationButton: React.FC<PaginationButtonProps> = ({
     <button
       key={page}
       onClick={() => onPageChange(page)}
-      className={`rounded-md px-3 py-1 ${currentPage === page ? "bg-blue-700 text-white" : "bg-blue-500 text-white hover:bg-blue-600"}`}
+      className={getButtonClass(currentPage, page)}
     >
       {page}
     </button>

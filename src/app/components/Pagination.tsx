@@ -9,6 +9,22 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
+const getPrevButtonClass = (currentPage: number): string => {
+  return `rounded-md px-3 py-1 ${
+    currentPage === 1
+      ? "cursor-not-allowed bg-gray-300"
+      : "bg-blue-500 text-white hover:bg-blue-600"
+  }`;
+};
+
+const getNextButtonClass = (disableNext: boolean): string => {
+  return `rounded-md px-3 py-1 ${
+    disableNext
+      ? "cursor-not-allowed bg-gray-300"
+      : "bg-blue-500 text-white hover:bg-blue-600"
+  }`;
+};
+
 const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   currentResults,
@@ -23,11 +39,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={handlePrevPage}
         disabled={currentPage === 1}
-        className={`rounded-md px-3 py-1 ${
-          currentPage === 1
-            ? "cursor-not-allowed bg-gray-300"
-            : "bg-blue-500 text-white hover:bg-blue-600"
-        }`}
+        className={getPrevButtonClass(currentPage)}
       >
         Previous
       </button>
@@ -42,11 +54,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={handleNextPage}
         disabled={disableNext}
-        className={`rounded-md px-3 py-1 ${
-          disableNext
-            ? "cursor-not-allowed bg-gray-300"
-            : "bg-blue-500 text-white hover:bg-blue-600"
-        }`}
+        className={getNextButtonClass(disableNext)}
       >
         Next
       </button>
