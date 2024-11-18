@@ -4,99 +4,64 @@ import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 import { handleUserEmailChange } from "@/app/helpers/handleUserEmailChange";
 import { fetchData } from "@/app/helpers/fetchData";
 
-export const handlePhotoTitleChange = async ({
-  value,
-  setPhotoTitleFilter,
-  setAlbumTitleFilter,
-  setFilteredPhotos,
-  setIsLoading,
-  albumTitleFilter,
-  userEmailFilter,
-  filteredPhotos,
-  currentUserId,
-  setCurrentUserId,
-  currentPage,
-  setCurrentPage,
-  setUserEmailFilter,
-  pageChanged = false,
-}: HandleFilterChangeParams) => {
+export const handlePhotoTitleChange = async (
+  params: HandleFilterChangeParams,
+) => {
+  const {
+    value,
+    setPhotoTitleFilter,
+    setAlbumTitleFilter,
+    setFilteredPhotos,
+    setIsLoading,
+    albumTitleFilter,
+    userEmailFilter,
+    filteredPhotos,
+    currentUserId,
+    setCurrentUserId,
+    currentPage,
+    setCurrentPage,
+    setUserEmailFilter,
+    pageChanged = false,
+  } = params;
+
   console.log("photo value", value);
+
+  const baseParams = {
+    ...params,
+    photoTitleFilter: value || "",
+  };
+
   if (!value) {
     setPhotoTitleFilter("");
     if (albumTitleFilter) {
-      handleAlbumTitleChange({
-        value: albumTitleFilter,
-        setPhotoTitleFilter,
-        setAlbumTitleFilter,
-        setFilteredPhotos,
-        setIsLoading,
-        albumTitleFilter,
-        userEmailFilter,
-        photoTitleFilter: "",
-        filteredPhotos,
-        currentUserId,
-        setCurrentUserId,
-        currentPage,
-        setCurrentPage,
-        setUserEmailFilter,
-      });
+      handleAlbumTitleChange(baseParams);
     }
     if (userEmailFilter) {
-      handleUserEmailChange({
-        value: userEmailFilter,
-        setPhotoTitleFilter,
-        setAlbumTitleFilter,
-        setFilteredPhotos,
-        setIsLoading,
-        albumTitleFilter,
-        userEmailFilter,
-        photoTitleFilter: "",
-        filteredPhotos,
-        currentUserId,
-        setCurrentUserId,
-        currentPage,
-        setCurrentPage,
-        setUserEmailFilter,
-        pageChanged: true,
-      });
+      handleUserEmailChange({ ...baseParams, pageChanged: true });
     }
     if (!albumTitleFilter && !userEmailFilter) {
       const fetchedPhotos = await fetchData("/api/photos");
       setIsLoading(false);
       setFilteredPhotos(fetchedPhotos);
-      return;
     }
     return;
   }
+
   if ((albumTitleFilter && !pageChanged) || (userEmailFilter && !pageChanged)) {
-    const updatedPhotos = filteredPhotos.filter((photo) => {
-      return photo.title.toLowerCase().includes(value.toLowerCase());
-    });
+    const updatedPhotos = filteredPhotos.filter((photo) =>
+      photo.title.toLowerCase().includes(value.toLowerCase()),
+    );
     setFilteredPhotos(updatedPhotos);
     setPhotoTitleFilter(value);
     setIsLoading(false);
     return;
   }
+
   if (userEmailFilter && pageChanged) {
-    handleUserEmailChange({
-      value: userEmailFilter,
-      setPhotoTitleFilter,
-      setAlbumTitleFilter,
-      setFilteredPhotos,
-      setIsLoading,
-      albumTitleFilter,
-      userEmailFilter,
-      photoTitleFilter: value,
-      filteredPhotos,
-      currentUserId,
-      setCurrentUserId,
-      currentPage,
-      setCurrentPage,
-      setUserEmailFilter,
-      pageChanged,
-    });
+    handleUserEmailChange(baseParams);
     return;
   }
+
   const photosByTitle = await fetchData(
     `/api/photos?title=${encodeURIComponent(value)}&start=${(currentPage - 1) * PAGE_LIMIT}`,
   );

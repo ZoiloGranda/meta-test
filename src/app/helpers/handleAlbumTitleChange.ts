@@ -4,41 +4,34 @@ import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 import { Album } from "@/models/Album";
 import { fetchData } from "@/app/helpers/fetchData";
 
-export const handleAlbumTitleChange = async ({
-  value,
-  setAlbumTitleFilter,
-  setPhotoTitleFilter,
-  setFilteredPhotos,
-  setIsLoading,
-  albumTitleFilter,
-  userEmailFilter,
-  photoTitleFilter,
-  filteredPhotos,
-  currentUserId,
-  setCurrentUserId,
-  currentPage,
-  setCurrentPage,
-  setUserEmailFilter,
-}: HandleFilterChangeParams) => {
+export const handleAlbumTitleChange = async (
+  params: HandleFilterChangeParams,
+) => {
+  const {
+    value,
+    setAlbumTitleFilter,
+    setPhotoTitleFilter,
+    setFilteredPhotos,
+    setIsLoading,
+    albumTitleFilter,
+    userEmailFilter,
+    photoTitleFilter,
+    filteredPhotos,
+    currentUserId,
+    setCurrentUserId,
+    currentPage,
+    setCurrentPage,
+    setUserEmailFilter,
+  } = params;
+
   console.log("album value", value);
+
   if (!value) {
     setAlbumTitleFilter("");
     if (photoTitleFilter) {
       await handlePhotoTitleChange({
-        value: photoTitleFilter,
-        setPhotoTitleFilter,
-        setAlbumTitleFilter,
-        setFilteredPhotos,
-        setIsLoading,
-        albumTitleFilter,
-        userEmailFilter,
-        photoTitleFilter,
-        filteredPhotos,
-        currentUserId,
-        setCurrentUserId,
-        currentPage,
-        setCurrentPage,
-        setUserEmailFilter,
+        ...params,
+        pageChanged: true,
       });
       return;
     }
@@ -50,20 +43,22 @@ export const handleAlbumTitleChange = async ({
     }
     return;
   }
+
   const url = userEmailFilter
     ? `/api/albums?title=${encodeURIComponent(value)}&userId=${currentUserId}`
     : `/api/albums?title=${encodeURIComponent(value)}`;
   console.log("url", url);
+
   const filteredAlbums: Album[] = await fetchData(url);
   console.log("filteredAlbums", filteredAlbums);
+
   const albumIds = filteredAlbums.map((album) => album.id);
   const albumPhotos = photoTitleFilter
     ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))
-    : await (async () => {
-        return await fetchData(
-          `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * Number(PAGE_LIMIT)}`,
-        );
-      })();
+    : await fetchData(
+        `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * Number(PAGE_LIMIT)}`,
+      );
+
   setAlbumTitleFilter(value);
   setFilteredPhotos(albumPhotos);
   setIsLoading(false);
