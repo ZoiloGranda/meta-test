@@ -8,4 +8,4 @@ export const CAMERA_LOGO_SIZE = {
   height: 256,
 };
 export const DEBOUNCE_DELAY = 400;
-export const PAGE_LIMIT = 100;
+export const PAGE_LIMIT = 25;
