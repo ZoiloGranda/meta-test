@@ -55,7 +55,6 @@ export const handleAlbumTitleChange = async (
   const url = userEmailFilter
     ? `/api/albums?title=${encodeURIComponent(value)}&userId=${currentUserId}`
     : `/api/albums?title=${encodeURIComponent(value)}`;
-
   const filteredAlbums: Album[] = await fetchData(url);
   if (filteredAlbums.length === 0) {
     setAlbumTitleFilter(value);
@@ -64,12 +63,27 @@ export const handleAlbumTitleChange = async (
     return;
   }
   const albumIds = filteredAlbums.map((album) => album.id);
-  const albumPhotos: Photo[] = photoTitleFilter
-    ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))
-    : await fetchData(
-        `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * Number(PAGE_LIMIT)}`,
-      );
-
+  if (photoTitleFilter && filteredPhotos.length > 0) {
+    const albumPhotos: Photo[] = filteredPhotos.filter((photo) =>
+      albumIds.includes(photo.albumId),
+    );
+    setAlbumTitleFilter(value);
+    setFilteredPhotos(albumPhotos);
+    setIsLoading(false);
+    return;
+  }
+  if (photoTitleFilter && filteredPhotos.length === 0) {
+    const albumPhotos: Photo[] = await fetchData(
+      `/api/photos?albumIds=${albumIds}&title=${photoTitleFilter}&start=${(currentPage - 1) * Number(PAGE_LIMIT)}`,
+    );
+    setAlbumTitleFilter(value);
+    setFilteredPhotos(albumPhotos);
+    setIsLoading(false);
+    return;
+  }
+  const albumPhotos: Photo[] = await fetchData(
+    `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * Number(PAGE_LIMIT)}`,
+  );
   setAlbumTitleFilter(value);
   setFilteredPhotos(albumPhotos);
   setIsLoading(false);
