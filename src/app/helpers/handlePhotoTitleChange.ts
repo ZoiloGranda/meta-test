@@ -22,9 +22,9 @@ export const handlePhotoTitleChange = async (
     currentPage,
     setCurrentPage,
     setUserEmailFilter,
+    photoTitleFilter,
     pageChanged = false,
   } = params;
-
   const baseParams = {
     ...params,
     photoTitleFilter: value || "",

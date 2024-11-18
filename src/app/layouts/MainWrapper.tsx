@@ -81,7 +81,11 @@ const MainWrapper = () => {
   }: {
     pageChanged: boolean;
   }) => {
-    await handlePhotoTitleChange({ ...handlerParams, pageChanged });
+    await handlePhotoTitleChange({
+      ...handlerParams,
+      value: photoTitleFilter,
+      pageChanged,
+    });
   };
 
   const doAlbumTitleChange = async () => {
