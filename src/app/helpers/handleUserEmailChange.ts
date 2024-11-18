@@ -1,7 +1,7 @@
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 import { Album } from "@/models/Album";
 import { PAGE_LIMIT } from "@/app/constants";
-import { HandleFilterChangeParams } from "@/app/helpers/FiltersParamsType";
+import { HandleFilterChangeParams } from "@/app/helpers/types/FiltersParamsType";
 
 export const handleUserEmailChange = async ({
   value,

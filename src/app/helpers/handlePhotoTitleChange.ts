@@ -1,5 +1,5 @@
 import { PAGE_LIMIT } from "@/app/constants";
-import { HandleFilterChangeParams } from "@/app/helpers/FiltersParamsType";
+import { HandleFilterChangeParams } from "@/app/helpers/types/FiltersParamsType";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 import { handleUserEmailChange } from "@/app/helpers/handleUserEmailChange";
 
