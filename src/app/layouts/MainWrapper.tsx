@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Photo } from "@/models/Photo";
 import { parseFilter } from "@/app/helpers/filterName";
 import MainFilters from "@/app/layouts/MainFilters";

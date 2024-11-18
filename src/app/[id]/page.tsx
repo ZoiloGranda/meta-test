@@ -32,6 +32,8 @@ const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
     getData();
   }, [params]);
 
+  const onLoad = () => setIsImageLoading(false);
+
   return (
     <>
       {isLoading && (
@@ -53,8 +55,8 @@ const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
                 alt={photoWithMetadata.title}
                 width="600"
                 height="600"
-                onError={() => setIsImageLoading(false)}
-                onLoad={() => setIsImageLoading(false)}
+                onError={onLoad}
+                onLoad={onLoad}
                 className={`${isImageLoading ? "hidden" : "block h-fit"}`}
               />
             </div>

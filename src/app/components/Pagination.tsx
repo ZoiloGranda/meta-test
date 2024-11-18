@@ -1,5 +1,6 @@
 import PaginationButton from "@/app/components/PaginationButton";
 import { PAGE_LIMIT } from "@/app/constants";
+import { getPages } from "@/app/helpers/getPages";
 import React from "react";
 
 interface PaginationProps {
@@ -13,18 +14,14 @@ const Pagination: React.FC<PaginationProps> = ({
   currentResults,
   onPageChange,
 }) => {
-  const pages =
-    currentResults === Number(PAGE_LIMIT)
-      ? currentPage >= 2
-        ? [currentPage - 1, currentPage, currentPage + 1]
-        : [currentPage, currentPage + 1]
-      : [currentPage];
+  const pages = getPages(currentResults, PAGE_LIMIT, currentPage);
   const disableNext = currentResults < Number(PAGE_LIMIT);
-
+  const handlePrevPage = () => onPageChange(currentPage - 1);
+  const handleNextPage = () => onPageChange(currentPage + 1);
   return (
     <div className="mt-4 flex items-center justify-center space-x-2">
       <button
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={handlePrevPage}
         disabled={currentPage === 1}
         className={`rounded-md px-3 py-1 ${
           currentPage === 1
@@ -43,7 +40,7 @@ const Pagination: React.FC<PaginationProps> = ({
         />
       ))}
       <button
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={handleNextPage}
         disabled={disableNext}
         className={`rounded-md px-3 py-1 ${
           disableNext

@@ -1,6 +1,5 @@
 ## To Do
 
-Toast for errors
 tests
 ci/cd
 show all metadata for current batch
@@ -13,7 +12,6 @@ const imgClasses = isLoading
 ```
 
 Other routes send to home
-Hosting
 change pages directory
 use API_URL from constants
 use the same function schema for all get endpoints

@@ -8,7 +8,7 @@ interface InfoItemProps {
 const InfoItem: React.FC<InfoItemProps> = ({ label, value }) => {
   return (
     <p>
-      <strong>{label}:</strong> {value}
+      <span className="font-semibold">{label}:</span> {value}
     </p>
   );
 };
