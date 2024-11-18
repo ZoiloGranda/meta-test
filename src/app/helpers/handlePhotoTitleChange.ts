@@ -66,7 +66,11 @@ export const handlePhotoTitleChange = async (
   }
 
   if (userEmailFilter && pageChanged) {
-    handleUserEmailChange(baseParams);
+    await handleUserEmailChange({
+      ...params,
+      value: userEmailFilter,
+      pageChanged: true,
+    });
     return;
   }
 

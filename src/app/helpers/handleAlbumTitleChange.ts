@@ -4,6 +4,7 @@ import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 import { Album } from "@/models/Album";
 import { fetchData } from "@/app/helpers/fetchData";
 import { Photo } from "@/models/Photo";
+import { handleUserEmailChange } from "@/app/helpers/handleUserEmailChange";
 
 export const handleAlbumTitleChange = async (
   params: HandleFilterChangeParams,
@@ -33,6 +34,14 @@ export const handleAlbumTitleChange = async (
       await handlePhotoTitleChange({
         ...params,
         value: photoTitleFilter,
+        pageChanged: true,
+      });
+      return;
+    }
+    if (userEmailFilter) {
+      await handleUserEmailChange({
+        ...params,
+        value: userEmailFilter,
         pageChanged: true,
       });
       return;
