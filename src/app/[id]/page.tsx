@@ -35,7 +35,7 @@ const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
           <h2 className="w-full text-xl capitalize text-gray-600">
             {photoWithMetadata.title}
           </h2>
-          <div className="flex w-full flex-wrap justify-between">
+          <div className="flex w-full flex-wrap justify-evenly">
             <div className="flex flex-wrap">
               {isImageLoading && (
                 <div className="loader h-32 w-32 justify-items-center object-cover"></div>
