@@ -21,15 +21,15 @@ const PhotoItem: React.FC<PhotoItemProps> = ({ photo }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    if (!photo || isLoading) return;
     const fetchData = async () => {
       const data = await getData({ id: String(photo.id) });
       if (data) {
         setPhotoWithMetadata(data);
       }
-      setIsLoading(false);
     };
     fetchData();
-  }, []);
+  }, [isLoading]);
 
   const onLoadEvent = () => {
     setIsLoading(false);
