@@ -11,6 +11,7 @@ import Pagination from "@/app/components/Pagination";
 import { PAGE_LIMIT } from "@/app/constants";
 import { fetchData } from "@/app/helpers/fetchData";
 import NoPhotosFound from "@/app/components/NoPhotosFound";
+import PhotoMessage from "@/app/components/PhotoMessage";
 
 const MainWrapper = () => {
   const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
@@ -149,6 +150,9 @@ const MainWrapper = () => {
           onPageChange={handlePageChange}
           currentResults={filteredPhotos.length}
         />
+      </div>
+      <div className="flex w-full justify-evenly">
+        <PhotoMessage count={filteredPhotos.length} />
       </div>
       <div className="flex w-full justify-evenly">
         <PhotoGrid photos={filteredPhotos} isLoading={isLoading} />
