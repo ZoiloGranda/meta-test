@@ -137,12 +137,15 @@ const MainWrapper = () => {
     switch (filters.type) {
       case "photo":
         setPhotoTitleFilter(value);
+        setCurrentPage(1);
         break;
       case "album":
         setAlbumTitleFilter(value);
+        setCurrentPage(1);
         break;
       case "user":
         setUserEmailFilter(value);
+        setCurrentPage(1);
         break;
       default:
         break;
