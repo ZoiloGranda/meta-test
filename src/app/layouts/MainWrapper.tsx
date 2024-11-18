@@ -39,6 +39,23 @@ const MainWrapper = () => {
     }
   };
 
+  const handlerParams = {
+    value: "",
+    setPhotoTitleFilter,
+    setAlbumTitleFilter,
+    setFilteredPhotos,
+    setIsLoading,
+    albumTitleFilter,
+    userEmailFilter,
+    photoTitleFilter,
+    filteredPhotos,
+    currentUserId,
+    setCurrentUserId,
+    currentPage,
+    setCurrentPage,
+    setUserEmailFilter,
+  };
+
   useEffect(() => {
     if (emptyFilters) {
       fetchPhotos();
@@ -63,60 +80,17 @@ const MainWrapper = () => {
   }: {
     pageChanged: boolean;
   }) => {
-    await handlePhotoTitleChange({
-      value: photoTitleFilter,
-      setPhotoTitleFilter,
-      setAlbumTitleFilter,
-      setFilteredPhotos,
-      setIsLoading,
-      albumTitleFilter,
-      userEmailFilter,
-      photoTitleFilter,
-      filteredPhotos,
-      currentUserId,
-      setCurrentUserId,
-      currentPage,
-      setCurrentPage,
-      setUserEmailFilter,
-      pageChanged,
-    });
+    await handlePhotoTitleChange({ ...handlerParams, pageChanged });
   };
 
   const doAlbumTitleChange = async () => {
-    handleAlbumTitleChange({
-      value: albumTitleFilter,
-      setPhotoTitleFilter,
-      setAlbumTitleFilter,
-      setFilteredPhotos,
-      setIsLoading,
-      albumTitleFilter,
-      userEmailFilter,
-      photoTitleFilter,
-      filteredPhotos,
-      currentUserId,
-      setCurrentUserId,
-      currentPage,
-      setCurrentPage,
-      setUserEmailFilter,
-    });
+    handleAlbumTitleChange({ ...handlerParams, value: albumTitleFilter });
   };
 
   const doUserEmailChange = async () => {
     handleUserEmailChange({
+      ...handlerParams,
       value: userEmailFilter,
-      setPhotoTitleFilter,
-      setAlbumTitleFilter,
-      setFilteredPhotos,
-      setIsLoading,
-      albumTitleFilter,
-      userEmailFilter,
-      photoTitleFilter,
-      filteredPhotos,
-      currentUserId,
-      setCurrentUserId,
-      currentPage,
-      setCurrentPage,
-      setUserEmailFilter,
     });
   };
 
