@@ -4,7 +4,7 @@ export const getData = async (params: {
   id: string;
 }): Promise<PhotoWithMetadata | undefined> => {
   try {
-    const { id } = await params;
+    const { id } = params;
     const photoResponse = await fetch(
       `/api/photos/${encodeURIComponent(id)}/metadata`,
     );
