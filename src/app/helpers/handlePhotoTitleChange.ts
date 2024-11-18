@@ -1,4 +1,5 @@
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
+import { handleUserEmailChange } from "@/app/helpers/handleUserEmailChange";
 import { Photo } from "@/models/Photo";
 
 interface HandlePhotoTitleChangeParams {
@@ -15,6 +16,8 @@ interface HandlePhotoTitleChangeParams {
   setCurrentUserId: (id: number) => void;
   currentPage: number;
   setCurrentPage: (page: number) => void;
+  setUserEmailFilter: (value: string) => void;
+  pageChanged?: boolean;
 }
 
 export const handlePhotoTitleChange = async ({
@@ -30,6 +33,8 @@ export const handlePhotoTitleChange = async ({
   setCurrentUserId,
   currentPage,
   setCurrentPage,
+  setUserEmailFilter,
+  pageChanged = false,
 }: HandlePhotoTitleChangeParams) => {
   console.log("photo value", value);
   if (!value) {
@@ -51,6 +56,24 @@ export const handlePhotoTitleChange = async ({
         setCurrentPage,
       });
     }
+    if (userEmailFilter) {
+      handleUserEmailChange({
+        value: userEmailFilter,
+        setPhotoTitleFilter,
+        setAlbumTitleFilter,
+        setFilteredPhotos,
+        setIsLoading,
+        albumTitleFilter,
+        userEmailFilter,
+        photoTitleFilter: "",
+        filteredPhotos,
+        currentUserId,
+        setCurrentUserId,
+        currentPage,
+        setCurrentPage,
+        setUserEmailFilter,
+      });
+    }
     if (!albumTitleFilter && !userEmailFilter) {
       const response = await fetch("/api/photos");
       const data = await response.json();
@@ -61,13 +84,33 @@ export const handlePhotoTitleChange = async ({
     }
     return;
   }
-  if (albumTitleFilter || userEmailFilter) {
+  if ((albumTitleFilter && !pageChanged) || (userEmailFilter && !pageChanged)) {
     const updatedPhotos = filteredPhotos.filter((photo) => {
       return photo.title.toLowerCase().includes(value.toLowerCase());
     });
     setFilteredPhotos(updatedPhotos);
     setPhotoTitleFilter(value);
     setIsLoading(false);
+    return;
+  }
+  if (userEmailFilter && pageChanged) {
+    handleUserEmailChange({
+      value: userEmailFilter,
+      setPhotoTitleFilter,
+      setAlbumTitleFilter,
+      setFilteredPhotos,
+      setIsLoading,
+      albumTitleFilter,
+      userEmailFilter,
+      photoTitleFilter: value,
+      filteredPhotos,
+      currentUserId,
+      setCurrentUserId,
+      currentPage,
+      setCurrentPage,
+      setUserEmailFilter,
+      pageChanged,
+    });
     return;
   }
 

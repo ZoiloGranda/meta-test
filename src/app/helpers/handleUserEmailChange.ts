@@ -17,6 +17,7 @@ interface HandleUserEmailChangeParams {
   setCurrentUserId: (id: number) => void;
   currentPage: number;
   setCurrentPage: (page: number) => void;
+  pageChanged?: boolean;
 }
 export const handleUserEmailChange = async ({
   value,
@@ -33,6 +34,7 @@ export const handleUserEmailChange = async ({
   setCurrentUserId,
   currentPage,
   setCurrentPage,
+  pageChanged = false,
 }: HandleUserEmailChangeParams) => {
   if (!value) {
     setUserEmailFilter("");
@@ -76,12 +78,32 @@ export const handleUserEmailChange = async ({
   const albumData = await albumResponse.json();
   const userAlbums: Album[] = albumData.albums;
   const albumIds = userAlbums.map((album) => album.id);
-  if (photoTitleFilter) {
+  if (photoTitleFilter && !pageChanged) {
     const photosByUser = filteredPhotos.filter((photo) =>
       albumIds.includes(photo.albumId),
     );
     setUserEmailFilter(value);
     setFilteredPhotos(photosByUser);
+    setIsLoading(false);
+    return;
+  }
+  if (albumTitleFilter && !pageChanged) {
+    const photosByUser = filteredPhotos.filter((photo) =>
+      albumIds.includes(photo.albumId),
+    );
+    setUserEmailFilter(value);
+    setFilteredPhotos(photosByUser);
+    setIsLoading(false);
+    return;
+  }
+  if (photoTitleFilter && pageChanged) {
+    const photosResponse = await fetch(
+      `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * 25}&title=${encodeURIComponent(photoTitleFilter)}`,
+    );
+    const photosData = await photosResponse.json();
+    const userPhotos = photosData.photos;
+    setUserEmailFilter(value);
+    setFilteredPhotos(userPhotos);
     setIsLoading(false);
     return;
   }

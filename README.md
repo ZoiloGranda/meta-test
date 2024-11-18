@@ -1,6 +1,6 @@
 ## To Do
 
-first album title the user email not working
+first photo title the user email, then remove photo title not working
 clear page on filter change
 paginate album should not request album data again when changing pages, only photo data
 pagination

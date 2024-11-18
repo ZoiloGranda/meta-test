@@ -43,7 +43,7 @@ const MainWrapper = () => {
       return;
     }
     if (photoTitleFilter) {
-      doPhotoTitleChange();
+      doPhotoTitleChange({ pageChanged: true });
       return;
     }
     if (albumTitleFilter) {
@@ -56,7 +56,11 @@ const MainWrapper = () => {
     }
   }, [currentPage]);
 
-  const doPhotoTitleChange = async () => {
+  const doPhotoTitleChange = async ({
+    pageChanged = false,
+  }: {
+    pageChanged: boolean;
+  }) => {
     await handlePhotoTitleChange({
       value: photoTitleFilter,
       setPhotoTitleFilter,
@@ -71,6 +75,8 @@ const MainWrapper = () => {
       setCurrentUserId,
       currentPage,
       setCurrentPage,
+      setUserEmailFilter,
+      pageChanged,
     });
   };
 
@@ -112,7 +118,7 @@ const MainWrapper = () => {
   };
 
   useEffect(() => {
-    doPhotoTitleChange();
+    doPhotoTitleChange({ pageChanged: false });
   }, [photoTitleFilter]);
 
   useEffect(() => {
