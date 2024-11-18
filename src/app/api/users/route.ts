@@ -1,3 +1,4 @@
+import { PAGE_LIMIT } from "@/app/constants";
 import { User } from "@/models/User";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -12,7 +13,7 @@ export async function GET(req: NextRequest) {
   try {
     const params = new URLSearchParams({
       ...(start ? { _start: String(start) } : { _start: "0" }),
-      ...(limit ? { _limit: String(limit) } : { _limit: "25" }),
+      ...(limit ? { _limit: String(limit) } : { _limit: String(PAGE_LIMIT) }),
       ...(email ? { email } : {}),
     });
 

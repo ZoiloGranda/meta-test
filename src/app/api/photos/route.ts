@@ -1,4 +1,5 @@
 import { buildAlbumsIds } from "@/app/api/photos/buildAlbumsIds";
+import { PAGE_LIMIT } from "@/app/constants";
 import { User } from "@/models/User";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
@@ -17,7 +18,7 @@ export async function GET(req: NextRequest) {
   try {
     const params = new URLSearchParams({
       ...(start ? { _start: start } : { _start: "0" }),
-      ...(limit ? { _limit: limit } : { _limit: "25" }),
+      ...(limit ? { _limit: limit } : { _limit: String(PAGE_LIMIT) }),
       ...(title ? { title_like: title } : {}),
       ...(page ? { _page: page } : {}),
     });

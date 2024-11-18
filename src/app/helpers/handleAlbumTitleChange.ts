@@ -1,3 +1,4 @@
+import { PAGE_LIMIT } from "@/app/constants";
 import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 import { Album } from "@/models/Album";
 import { Photo } from "@/models/Photo";
@@ -78,7 +79,7 @@ export const handleAlbumTitleChange = async ({
     ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))
     : await (async () => {
         const response = await fetch(
-          `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * 25}`,
+          `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * Number(PAGE_LIMIT)}`,
         );
         const data = await response.json();
         console.log("data ", data);

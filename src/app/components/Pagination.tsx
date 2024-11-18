@@ -1,4 +1,5 @@
 import PaginationButton from "@/app/components/PaginationButton";
+import { PAGE_LIMIT } from "@/app/constants";
 import React from "react";
 
 interface PaginationProps {
@@ -13,12 +14,12 @@ const Pagination: React.FC<PaginationProps> = ({
   onPageChange,
 }) => {
   const pages =
-    currentResults === 25
+    currentResults === Number(PAGE_LIMIT)
       ? currentPage >= 2
         ? [currentPage - 1, currentPage, currentPage + 1]
         : [currentPage, currentPage + 1]
       : [currentPage];
-  const disableNext = currentResults < 25;
+  const disableNext = currentResults < Number(PAGE_LIMIT);
 
   return (
     <div className="mt-4 flex items-center justify-center space-x-2">

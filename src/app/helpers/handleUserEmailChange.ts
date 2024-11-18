@@ -1,6 +1,7 @@
 import { Photo } from "@/models/Photo";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 import { Album } from "@/models/Album";
+import { PAGE_LIMIT } from "@/app/constants";
 
 interface HandleUserEmailChangeParams {
   value: string;
@@ -99,7 +100,7 @@ export const handleUserEmailChange = async ({
   }
   if (photoTitleFilter && pageChanged) {
     const photosResponse = await fetch(
-      `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * 25}&title=${encodeURIComponent(photoTitleFilter)}`,
+      `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * PAGE_LIMIT}&title=${encodeURIComponent(photoTitleFilter)}`,
     );
     const photosData = await photosResponse.json();
     const userPhotos = photosData.photos;
@@ -109,7 +110,7 @@ export const handleUserEmailChange = async ({
     return;
   }
   const photosResponse = await fetch(
-    `/api/photos?albumId=${albumIds}&start=${(currentPage - 1) * 25}`,
+    `/api/photos?albumId=${albumIds}&start=${(currentPage - 1) * PAGE_LIMIT}`,
   );
   const photosData = await photosResponse.json();
   const userPhotos = photosData.photos;

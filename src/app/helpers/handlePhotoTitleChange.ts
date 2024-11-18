@@ -1,3 +1,4 @@
+import { PAGE_LIMIT } from "@/app/constants";
 import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 import { handleUserEmailChange } from "@/app/helpers/handleUserEmailChange";
 import { Photo } from "@/models/Photo";
@@ -116,7 +117,7 @@ export const handlePhotoTitleChange = async ({
   }
 
   const response = await fetch(
-    `/api/photos?title=${encodeURIComponent(value)}&start=${(currentPage - 1) * 25}`,
+    `/api/photos?title=${encodeURIComponent(value)}&start=${(currentPage - 1) * PAGE_LIMIT}`,
   );
   const data = await response.json();
   const photosByTitle = data.photos;
