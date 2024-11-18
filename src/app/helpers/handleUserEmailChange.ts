@@ -27,7 +27,6 @@ export const handleUserEmailChange = async (
     setCurrentPage,
     pageChanged = false,
   } = params;
-
   if (!value) {
     setUserEmailFilter("");
     setCurrentUserId(0);

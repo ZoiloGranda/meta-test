@@ -25,7 +25,6 @@ export const handleAlbumTitleChange = async (
     setCurrentPage,
     setUserEmailFilter,
   } = params;
-
   if (!value) {
     setAlbumTitleFilter("");
     if (photoTitleFilter) {
@@ -58,6 +57,12 @@ export const handleAlbumTitleChange = async (
     : `/api/albums?title=${encodeURIComponent(value)}`;
 
   const filteredAlbums: Album[] = await fetchData(url);
+  if (filteredAlbums.length === 0) {
+    setAlbumTitleFilter(value);
+    setFilteredPhotos([]);
+    setIsLoading(false);
+    return;
+  }
   const albumIds = filteredAlbums.map((album) => album.id);
   const albumPhotos: Photo[] = photoTitleFilter
     ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))
