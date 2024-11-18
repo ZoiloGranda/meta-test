@@ -10,6 +10,7 @@ import { handleUserEmailChange } from "@/app/helpers/handleUserEmailChange";
 import Pagination from "@/app/components/Pagination";
 import { PAGE_LIMIT } from "@/app/constants";
 import { fetchData } from "@/app/helpers/fetchData";
+import NoPhotosFound from "@/app/components/NoPhotosFound";
 
 const MainWrapper = () => {
   const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
@@ -177,6 +178,9 @@ const MainWrapper = () => {
       </div>
       <div className="flex w-full justify-evenly">
         <PhotoGrid photos={filteredPhotos} isLoading={isLoading} />
+      </div>
+      <div className="mt-4 flex w-full justify-evenly text-center">
+        <NoPhotosFound photoCount={filteredPhotos.length} />
       </div>
     </>
   );
