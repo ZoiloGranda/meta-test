@@ -3,6 +3,7 @@ import { HandleFilterChangeParams } from "@/app/helpers/types/FiltersParamsType"
 import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 import { Album } from "@/models/Album";
 import { fetchData } from "@/app/helpers/fetchData";
+import { Photo } from "@/models/Photo";
 
 export const handleAlbumTitleChange = async (
   params: HandleFilterChangeParams,
@@ -37,7 +38,7 @@ export const handleAlbumTitleChange = async (
       return;
     }
     if (!photoTitleFilter && !userEmailFilter) {
-      const fetchedPhotos = await fetchData("/api/photos");
+      const fetchedPhotos: Photo[] = await fetchData("/api/photos");
       setFilteredPhotos(fetchedPhotos);
       setIsLoading(false);
       return;
@@ -53,7 +54,7 @@ export const handleAlbumTitleChange = async (
   console.log("filteredAlbums", filteredAlbums);
 
   const albumIds = filteredAlbums.map((album) => album.id);
-  const albumPhotos = photoTitleFilter
+  const albumPhotos: Photo[] = photoTitleFilter
     ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))
     : await fetchData(
         `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * Number(PAGE_LIMIT)}`,

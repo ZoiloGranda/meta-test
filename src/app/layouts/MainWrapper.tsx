@@ -27,7 +27,7 @@ const MainWrapper = () => {
   const fetchPhotos = async () => {
     setIsLoading(true);
     try {
-      const photos = await fetchData(
+      const photos: Photo[] = await fetchData(
         `/api/photos?start=${(currentPage - 1) * PAGE_LIMIT}`,
       );
       setFilteredPhotos(photos);

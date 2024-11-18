@@ -2,11 +2,8 @@
 
 ci/cd
 show all metadata for current batch
-use the same function schema for all get endpoints
-style spacing in photodata
 explain why i used nextjs
 explain why the pagination doesnt get all the data
-add api types to api responses
 
 ```bash
 use single function to parse URLSearchParams
