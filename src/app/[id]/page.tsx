@@ -1,4 +1,5 @@
 "use client";
+import { getData } from "@/app/helpers/getPhotoData";
 import PhotoData from "@/app/layouts/PhotoData";
 import { PhotoWithMetadata } from "@/models/Photo";
 import React, { useState, useEffect } from "react";
@@ -6,30 +7,19 @@ import React, { useState, useEffect } from "react";
 const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isImageLoading, setIsImageLoading] = useState(true);
-
   const [photoWithMetadata, setPhotoWithMetadata] =
     useState<PhotoWithMetadata>();
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const { id } = await params;
-
-        const photoResponse = await fetch(
-          `/api/photos/${encodeURIComponent(id)}/metadata`,
-        );
-        console.log("photoResponse", photoResponse);
-        const photoData = await photoResponse.json();
-        console.log("photoData", photoData);
-        //
-        setPhotoWithMetadata(photoData);
-      } catch (error) {
-        console.error("Error loading photo:", error);
-      } finally {
-        setIsLoading(false);
+    const fetchData = async () => {
+      const { id } = await params;
+      const data = await getData({ id });
+      if (data) {
+        setPhotoWithMetadata(data);
       }
+      setIsLoading(false);
     };
-    getData();
+    fetchData();
   }, [params]);
 
   const onLoad = () => setIsImageLoading(false);
