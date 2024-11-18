@@ -1,24 +1,8 @@
 import { PAGE_LIMIT } from "@/app/constants";
+import { HandleFilterChangeParams } from "@/app/helpers/FiltersParamsType";
 import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 import { Album } from "@/models/Album";
 import { Photo } from "@/models/Photo";
-
-interface HandleAlbumTitleChangeParams {
-  value: string;
-  setAlbumTitleFilter: (value: string) => void;
-  setPhotoTitleFilter: (value: string) => void;
-  setFilteredPhotos: (photos: Photo[]) => void;
-  setIsLoading: (loading: boolean) => void;
-  albumTitleFilter: string;
-  userEmailFilter: string;
-  photoTitleFilter: string;
-  filteredPhotos: Photo[];
-  currentUserId: number;
-  setCurrentUserId: (id: number) => void;
-  currentPage: number;
-  setCurrentPage: (page: number) => void;
-  setUserEmailFilter: (value: string) => void;
-}
 
 export const handleAlbumTitleChange = async ({
   value,
@@ -35,7 +19,7 @@ export const handleAlbumTitleChange = async ({
   currentPage,
   setCurrentPage,
   setUserEmailFilter,
-}: HandleAlbumTitleChangeParams) => {
+}: HandleFilterChangeParams) => {
   console.log("album value", value);
   if (!value) {
     setAlbumTitleFilter("");
