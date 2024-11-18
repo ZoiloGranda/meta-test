@@ -3,6 +3,7 @@
 
 ```bash
 npm install
+create .env file based on .env.example
 npm run dev
 Open http://localhost:3000
 ```
