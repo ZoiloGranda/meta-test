@@ -8,12 +8,9 @@ export const getData = async (params: {
     const photoResponse = await fetch(
       `/api/photos/${encodeURIComponent(id)}/metadata`,
     );
-    console.log("photoResponse", photoResponse);
     const photoData = await photoResponse.json();
-    console.log("photoData", photoData);
     return photoData;
-  } catch (error) {
-    console.error("Error loading photo:", error);
+  } catch {
     return undefined;
   }
 };

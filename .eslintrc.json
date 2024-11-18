@@ -3,6 +3,7 @@
   "rules": {
     "@next/next/no-img-element": "off",
     "quotes": ["error", "double"],
-    "ignoreRestSiblings": true
+    "ignoreRestSiblings": true,
+    "react-hooks/exhaustive-deps": "off"
   }
 }

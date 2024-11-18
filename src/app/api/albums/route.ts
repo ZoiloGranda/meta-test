@@ -21,14 +21,12 @@ export async function GET(req: NextRequest) {
       ...(userId ? { userId: userId } : {}),
       ...(page ? { _page: page } : {}),
     });
-    console.log("albums url", `${API_URL}/albums?${params.toString()}`);
     const response = await fetch(`${API_URL}/albums?${params.toString()}`);
 
     if (!response.ok) {
       throw new Error("Albums response was not ok");
     }
     const albums: Album[] = await response.json();
-    console.log("route albums", albums);
     return NextResponse.json(albums, { status: 200 });
   } catch {
     return NextResponse.json(

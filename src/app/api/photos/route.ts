@@ -15,7 +15,6 @@ export async function GET(req: NextRequest) {
   const albumIds = searchParams.get("albumIds");
   const albumIdsParams =
     albumIds && albumIds.length > 0 ? buildAlbumsIds(albumIds) : "";
-  console.log("albumIdsParams", albumIdsParams);
   try {
     const params = new URLSearchParams({
       ...(start ? { _start: start } : { _start: "0" }),
@@ -24,7 +23,6 @@ export async function GET(req: NextRequest) {
       ...(page ? { _page: page } : {}),
     });
     const url = `${API_URL}/photos?${params.toString()}${albumIdsParams}`;
-    console.log("url", url);
     const response = await fetch(url);
 
     if (!response.ok) {

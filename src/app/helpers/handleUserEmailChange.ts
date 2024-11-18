@@ -31,8 +31,6 @@ export const handleUserEmailChange = async (
   if (!value) {
     setUserEmailFilter("");
     setCurrentUserId(0);
-    console.log("photoTitleFilter", photoTitleFilter);
-    console.log("albumTitleFilter", albumTitleFilter);
     if (albumTitleFilter) {
       await handleAlbumTitleChange({
         ...params,
@@ -65,7 +63,6 @@ export const handleUserEmailChange = async (
   setCurrentUserId(user.id);
   const userAlbums: Album[] = await fetchData(`/api/albums?userId=${user.id}`);
   const albumIds = userAlbums.map((album) => album.id);
-  console.log("photoTitleFilter", photoTitleFilter);
 
   if ((photoTitleFilter || albumTitleFilter) && !pageChanged) {
     const photosByUser = filteredPhotos.filter((photo) =>

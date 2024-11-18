@@ -11,7 +11,6 @@ export async function GET(
   },
 ) {
   const { userId } = await params;
-  console.log("userId", userId);
   try {
     const user = await getUserbyId({ userId });
     return NextResponse.json({ user }, { status: 200 });

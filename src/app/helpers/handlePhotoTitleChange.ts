@@ -25,7 +25,6 @@ export const handlePhotoTitleChange = async (
     pageChanged = false,
   } = params;
 
-  console.log("photo value", value);
   const baseParams = {
     ...params,
     photoTitleFilter: value || "",
@@ -77,7 +76,6 @@ export const handlePhotoTitleChange = async (
   const photosByTitle: Photo[] = await fetchData(
     `/api/photos?title=${encodeURIComponent(value)}&start=${(currentPage - 1) * PAGE_LIMIT}`,
   );
-  console.log("photosByTitle", photosByTitle);
   setPhotoTitleFilter(value);
   setFilteredPhotos(photosByTitle);
   setIsLoading(false);
