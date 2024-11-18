@@ -95,6 +95,7 @@ const MainWrapper = () => {
       setCurrentUserId,
       currentPage,
       setCurrentPage,
+      setUserEmailFilter,
     });
   };
 

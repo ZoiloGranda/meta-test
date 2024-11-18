@@ -54,6 +54,7 @@ export const handlePhotoTitleChange = async ({
         setCurrentUserId,
         currentPage,
         setCurrentPage,
+        setUserEmailFilter,
       });
     }
     if (userEmailFilter) {

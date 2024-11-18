@@ -56,6 +56,7 @@ export const handleUserEmailChange = async ({
         setCurrentUserId,
         currentPage,
         setCurrentPage,
+        setUserEmailFilter,
       });
     }
 
