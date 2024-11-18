@@ -4,6 +4,7 @@ import { PAGE_LIMIT } from "@/app/constants";
 import { HandleFilterChangeParams } from "@/app/helpers/types/FiltersParamsType";
 import { fetchData } from "@/app/helpers/fetchData";
 import { User } from "@/models/User";
+import { handlePhotoTitleChange } from "@/app/helpers/handlePhotoTitleChange";
 
 export const handleUserEmailChange = async (
   params: HandleFilterChangeParams,
@@ -11,13 +12,18 @@ export const handleUserEmailChange = async (
   const {
     value,
     setUserEmailFilter,
+    setPhotoTitleFilter,
+    setAlbumTitleFilter,
     setFilteredPhotos,
     setIsLoading,
     albumTitleFilter,
+    userEmailFilter,
     photoTitleFilter,
     filteredPhotos,
+    currentUserId,
     setCurrentUserId,
     currentPage,
+    setCurrentPage,
     pageChanged = false,
   } = params;
 
@@ -29,6 +35,15 @@ export const handleUserEmailChange = async (
     if (albumTitleFilter) {
       await handleAlbumTitleChange({
         ...params,
+        value: albumTitleFilter,
+        pageChanged: true,
+      });
+      return;
+    }
+    if (photoTitleFilter) {
+      await handlePhotoTitleChange({
+        ...params,
+        value: photoTitleFilter,
         pageChanged: true,
       });
       return;

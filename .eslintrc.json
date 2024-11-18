@@ -2,6 +2,7 @@
   "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
   "rules": {
     "@next/next/no-img-element": "off",
-    "quotes": ["error", "double"]
+    "quotes": ["error", "double"],
+    "ignoreRestSiblings": true
   }
 }

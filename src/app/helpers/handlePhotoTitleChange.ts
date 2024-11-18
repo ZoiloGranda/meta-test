@@ -10,17 +10,21 @@ export const handlePhotoTitleChange = async (
   const {
     value,
     setPhotoTitleFilter,
+    setAlbumTitleFilter,
     setFilteredPhotos,
     setIsLoading,
     albumTitleFilter,
     userEmailFilter,
     filteredPhotos,
+    currentUserId,
+    setCurrentUserId,
     currentPage,
+    setCurrentPage,
+    setUserEmailFilter,
     pageChanged = false,
   } = params;
 
   console.log("photo value", value);
-
   const baseParams = {
     ...params,
     photoTitleFilter: value || "",
@@ -29,10 +33,18 @@ export const handlePhotoTitleChange = async (
   if (!value) {
     setPhotoTitleFilter("");
     if (albumTitleFilter) {
-      handleAlbumTitleChange(baseParams);
+      handleAlbumTitleChange({
+        ...baseParams,
+        value: albumTitleFilter,
+        pageChanged: true,
+      });
     }
     if (userEmailFilter) {
-      handleUserEmailChange({ ...baseParams, pageChanged: true });
+      handleUserEmailChange({
+        ...baseParams,
+        value: userEmailFilter,
+        pageChanged: true,
+      });
     }
     if (!albumTitleFilter && !userEmailFilter) {
       const fetchedPhotos = await fetchData("/api/photos");

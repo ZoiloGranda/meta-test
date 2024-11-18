@@ -10,13 +10,18 @@ export const handleAlbumTitleChange = async (
   const {
     value,
     setAlbumTitleFilter,
+    setPhotoTitleFilter,
     setFilteredPhotos,
     setIsLoading,
+    albumTitleFilter,
     userEmailFilter,
     photoTitleFilter,
     filteredPhotos,
     currentUserId,
+    setCurrentUserId,
     currentPage,
+    setCurrentPage,
+    setUserEmailFilter,
   } = params;
 
   console.log("album value", value);
@@ -26,6 +31,7 @@ export const handleAlbumTitleChange = async (
     if (photoTitleFilter) {
       await handlePhotoTitleChange({
         ...params,
+        value: photoTitleFilter,
         pageChanged: true,
       });
       return;
@@ -42,7 +48,6 @@ export const handleAlbumTitleChange = async (
   const url = userEmailFilter
     ? `/api/albums?title=${encodeURIComponent(value)}&userId=${currentUserId}`
     : `/api/albums?title=${encodeURIComponent(value)}`;
-  console.log("url", url);
 
   const filteredAlbums: Album[] = await fetchData(url);
   console.log("filteredAlbums", filteredAlbums);
