@@ -16,6 +16,7 @@ interface HandleAlbumTitleChangeParams {
   setCurrentUserId: (id: number) => void;
   currentPage: number;
   setCurrentPage: (page: number) => void;
+  setUserEmailFilter: (value: string) => void;
 }
 
 export const handleAlbumTitleChange = async ({
@@ -32,6 +33,7 @@ export const handleAlbumTitleChange = async ({
   setCurrentUserId,
   currentPage,
   setCurrentPage,
+  setUserEmailFilter,
 }: HandleAlbumTitleChangeParams) => {
   console.log("album value", value);
   if (!value) {
@@ -51,6 +53,7 @@ export const handleAlbumTitleChange = async ({
         setCurrentUserId,
         currentPage,
         setCurrentPage,
+        setUserEmailFilter,
       });
       return;
     }
