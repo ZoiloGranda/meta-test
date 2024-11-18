@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
       throw new Error("Users response was not ok");
     }
     const users: User[] = await response.json();
-    return NextResponse.json({ users }, { status: 200 });
+    return NextResponse.json(users[0], { status: 200 });
   } catch {
     return NextResponse.json(
       { error: "Failed to fetch users" },

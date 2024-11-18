@@ -3,6 +3,7 @@ import { Album } from "@/models/Album";
 import { PAGE_LIMIT } from "@/app/constants";
 import { HandleFilterChangeParams } from "@/app/helpers/types/FiltersParamsType";
 import { fetchData } from "@/app/helpers/fetchData";
+import { User } from "@/models/User";
 
 export const handleUserEmailChange = async ({
   value,
@@ -53,12 +54,11 @@ export const handleUserEmailChange = async ({
     }
     return;
   }
-  const response = await fetch(`/api/users?email=${encodeURIComponent(value)}`);
-  const data = await response.json();
-  console.log("data", data);
-  const userId = data.users[0].id;
-  setCurrentUserId(userId);
-  const userAlbums: Album[] = await fetchData(`/api/albums?userId=${userId}`);
+  const user: User = await fetchData(
+    `/api/users?email=${encodeURIComponent(value)}`,
+  );
+  setCurrentUserId(user.id);
+  const userAlbums: Album[] = await fetchData(`/api/albums?userId=${user.id}`);
   const albumIds = userAlbums.map((album) => album.id);
   console.log("photoTitleFilter", photoTitleFilter);
   if (photoTitleFilter && !pageChanged) {
