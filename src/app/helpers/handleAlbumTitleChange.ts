@@ -75,7 +75,7 @@ export const handleAlbumTitleChange = async ({
     ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))
     : await (async () => {
         const response = await fetch(
-          `/api/photos?albumId=${albumIds}&start=${(currentPage - 1) * 25}`,
+          `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * 25}`,
         );
         const data = await response.json();
         console.log("data ", data);
