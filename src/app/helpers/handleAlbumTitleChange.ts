@@ -53,9 +53,9 @@ export const handleAlbumTitleChange = async ({
   const url = userEmailFilter
     ? `/api/albums?title=${encodeURIComponent(value)}&userId=${currentUserId}`
     : `/api/albums?title=${encodeURIComponent(value)}`;
-  const response = await fetch(url);
-  const data = await response.json();
-  const filteredAlbums: Album[] = data.albums;
+  console.log("url", url);
+  const filteredAlbums: Album[] = await fetchData(url);
+  console.log("filteredAlbums", filteredAlbums);
   const albumIds = filteredAlbums.map((album) => album.id);
   const albumPhotos = photoTitleFilter
     ? filteredPhotos.filter((photo) => albumIds.includes(photo.albumId))

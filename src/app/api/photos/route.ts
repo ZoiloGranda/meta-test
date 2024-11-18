@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
       throw new Error("Photos response was not ok");
     }
     const photos: Photo[] = await response.json();
-    return NextResponse.json([...photos], { status: 200 });
+    return NextResponse.json(photos, { status: 200 });
   } catch {
     return NextResponse.json(
       { error: "Failed to fetch photos" },
