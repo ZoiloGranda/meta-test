@@ -80,6 +80,7 @@ export const handleUserEmailChange = async ({
   const albumData = await albumResponse.json();
   const userAlbums: Album[] = albumData.albums;
   const albumIds = userAlbums.map((album) => album.id);
+  console.log("photoTitleFilter", photoTitleFilter);
   if (photoTitleFilter && !pageChanged) {
     const photosByUser = filteredPhotos.filter((photo) =>
       albumIds.includes(photo.albumId),
@@ -109,8 +110,19 @@ export const handleUserEmailChange = async ({
     setIsLoading(false);
     return;
   }
+  if (!photoTitleFilter && pageChanged) {
+    const photosResponse = await fetch(
+      `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * PAGE_LIMIT}`,
+    );
+    const photosData = await photosResponse.json();
+    const userPhotos = photosData.photos;
+    setUserEmailFilter(value);
+    setFilteredPhotos(userPhotos);
+    setIsLoading(false);
+    return;
+  }
   const photosResponse = await fetch(
-    `/api/photos?albumId=${albumIds}&start=${(currentPage - 1) * PAGE_LIMIT}`,
+    `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * PAGE_LIMIT}`,
   );
   const photosData = await photosResponse.json();
   const userPhotos = photosData.photos;

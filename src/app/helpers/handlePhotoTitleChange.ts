@@ -74,6 +74,7 @@ export const handlePhotoTitleChange = async ({
         currentPage,
         setCurrentPage,
         setUserEmailFilter,
+        pageChanged: true,
       });
     }
     if (!albumTitleFilter && !userEmailFilter) {
