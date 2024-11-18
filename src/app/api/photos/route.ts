@@ -1,9 +1,9 @@
 import { buildAlbumsIds } from "@/app/api/photos/buildAlbumsIds";
 import { PAGE_LIMIT } from "@/app/constants";
-import { User } from "@/models/User";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import "dotenv/config";
+import { Photo } from "@/models/Photo";
 
 export async function GET(req: NextRequest) {
   const { API_URL } = process.env;
@@ -30,8 +30,8 @@ export async function GET(req: NextRequest) {
     if (!response.ok) {
       throw new Error("Photos response was not ok");
     }
-    const photos: User[] = await response.json();
-    return NextResponse.json({ photos }, { status: 200 });
+    const photos: Photo[] = await response.json();
+    return NextResponse.json([...photos], { status: 200 });
   } catch {
     return NextResponse.json(
       { error: "Failed to fetch photos" },

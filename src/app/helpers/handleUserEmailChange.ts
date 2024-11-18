@@ -2,6 +2,7 @@ import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 import { Album } from "@/models/Album";
 import { PAGE_LIMIT } from "@/app/constants";
 import { HandleFilterChangeParams } from "@/app/helpers/types/FiltersParamsType";
+import { fetchData } from "@/app/helpers/fetchData";
 
 export const handleUserEmailChange = async ({
   value,
@@ -45,9 +46,7 @@ export const handleUserEmailChange = async ({
     }
 
     if (!photoTitleFilter && !albumTitleFilter) {
-      const response = await fetch("/api/photos");
-      const data = await response.json();
-      const fetchedPhotos = data.photos;
+      const fetchedPhotos = await fetchData("/api/photos");
       setIsLoading(false);
       setFilteredPhotos(fetchedPhotos);
       return;
@@ -83,33 +82,26 @@ export const handleUserEmailChange = async ({
     return;
   }
   if (photoTitleFilter && pageChanged) {
-    const photosResponse = await fetch(
+    const userPhotos = await fetchData(
       `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * PAGE_LIMIT}&title=${encodeURIComponent(photoTitleFilter)}`,
     );
-    const photosData = await photosResponse.json();
-    const userPhotos = photosData.photos;
     setUserEmailFilter(value);
     setFilteredPhotos(userPhotos);
     setIsLoading(false);
     return;
   }
   if (!photoTitleFilter && pageChanged) {
-    const photosResponse = await fetch(
+    const userPhotos = await fetchData(
       `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * PAGE_LIMIT}`,
     );
-    const photosData = await photosResponse.json();
-    const userPhotos = photosData.photos;
     setUserEmailFilter(value);
     setFilteredPhotos(userPhotos);
     setIsLoading(false);
     return;
   }
-  const photosResponse = await fetch(
+  const userPhotos = await fetchData(
     `/api/photos?albumIds=${albumIds}&start=${(currentPage - 1) * PAGE_LIMIT}`,
   );
-  const photosData = await photosResponse.json();
-  const userPhotos = photosData.photos;
-
   setUserEmailFilter(value);
   setFilteredPhotos(userPhotos);
   setIsLoading(false);

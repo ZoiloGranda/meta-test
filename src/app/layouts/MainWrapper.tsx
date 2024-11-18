@@ -9,6 +9,7 @@ import { handleAlbumTitleChange } from "@/app/helpers/handleAlbumTitleChange";
 import { handleUserEmailChange } from "@/app/helpers/handleUserEmailChange";
 import Pagination from "@/app/components/Pagination";
 import { PAGE_LIMIT } from "@/app/constants";
+import { fetchData } from "@/app/helpers/fetchData";
 
 const MainWrapper = () => {
   const [filteredPhotos, setFilteredPhotos] = useState<Photo[]>([]);
@@ -26,11 +27,9 @@ const MainWrapper = () => {
   const fetchPhotos = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(
+      const photos = await fetchData(
         `/api/photos?start=${(currentPage - 1) * PAGE_LIMIT}`,
       );
-      const data = await response.json();
-      const photos = data.photos;
       setFilteredPhotos(photos);
     } catch (error) {
       console.error("Error fetching photos:", error);
