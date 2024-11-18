@@ -3,10 +3,11 @@ import { PAGE_LIMIT } from "@/app/constants";
 import { User } from "@/models/User";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import "dotenv/config";
 
 export async function GET(req: NextRequest) {
+  const { API_URL } = process.env;
   const searchParams = req.nextUrl.searchParams;
-  console.log("searchParams", searchParams);
   const limit = searchParams.get("limit");
   const start = searchParams.get("start");
   const title = searchParams.get("title");
@@ -22,7 +23,7 @@ export async function GET(req: NextRequest) {
       ...(title ? { title_like: title } : {}),
       ...(page ? { _page: page } : {}),
     });
-    const url = `https://jsonplaceholder.typicode.com/photos?${params.toString()}${albumIdsParams}`;
+    const url = `${API_URL}/photos?${params.toString()}${albumIdsParams}`;
     console.log("url", url);
     const response = await fetch(url);
 

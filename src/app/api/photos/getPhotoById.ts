@@ -1,10 +1,10 @@
 import { Photo } from "@/models/Photo";
+import "dotenv/config";
 
 export async function getPhotobyId({ photoId }: { photoId: string }) {
   try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/photos/${photoId}`,
-    );
+    const { API_URL } = process.env;
+    const response = await fetch(`${API_URL}/photos/${photoId}`);
     if (!response.ok) {
       throw new Error("Photo by id response was not ok");
     }

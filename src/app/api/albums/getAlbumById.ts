@@ -1,10 +1,10 @@
 import { Album } from "@/models/Album";
+import "dotenv/config";
 
 export async function getAlbumbyId({ albumId }: { albumId: string }) {
   try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/albums/${albumId}`,
-    );
+    const { API_URL } = process.env;
+    const response = await fetch(`${API_URL}/albums/${albumId}`);
 
     if (!response.ok) {
       throw new Error("Album by id response was not ok");

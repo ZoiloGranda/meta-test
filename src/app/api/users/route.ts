@@ -2,10 +2,11 @@ import { PAGE_LIMIT } from "@/app/constants";
 import { User } from "@/models/User";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
+import "dotenv/config";
 
 export async function GET(req: NextRequest) {
+  const { API_URL } = process.env;
   const searchParams = req.nextUrl.searchParams;
-  console.log("searchParams", searchParams);
   const email = searchParams.get("email");
   const limit = searchParams.get("limit");
   const start = searchParams.get("start");
@@ -17,9 +18,7 @@ export async function GET(req: NextRequest) {
       ...(email ? { email } : {}),
     });
 
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/users?${params.toString()}`,
-    );
+    const response = await fetch(`${API_URL}/users?${params.toString()}`);
 
     if (!response.ok) {
       throw new Error("Users response was not ok");

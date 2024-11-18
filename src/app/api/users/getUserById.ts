@@ -1,10 +1,10 @@
 import { User } from "@/models/User";
+import "dotenv/config";
 
 export async function getUserbyId({ userId }: { userId: string }) {
   try {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/users/${userId}`,
-    );
+    const { API_URL } = process.env;
+    const response = await fetch(`${API_URL}/users/${userId}`);
     if (!response.ok) {
       throw new Error("User by id response was not ok");
     }

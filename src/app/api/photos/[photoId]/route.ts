@@ -11,7 +11,6 @@ export async function GET(
   },
 ) {
   const { photoId } = await params;
-  console.log("photoId in 2", photoId);
   try {
     const photo = await getPhotobyId({ photoId });
     return NextResponse.json({ photo }, { status: 200 });
