@@ -54,13 +54,24 @@ export const handlePhotoTitleChange = async (
     return;
   }
 
-  if ((albumTitleFilter && !pageChanged) || (userEmailFilter && !pageChanged)) {
+  if (
+    (albumTitleFilter && !pageChanged && filteredPhotos.length > 0) ||
+    (userEmailFilter && !pageChanged && filteredPhotos.length > 0)
+  ) {
     const updatedPhotos = filteredPhotos.filter((photo) =>
       photo.title.toLowerCase().includes(value.toLowerCase()),
     );
     setFilteredPhotos(updatedPhotos);
     setPhotoTitleFilter(value);
     setIsLoading(false);
+    return;
+  }
+  if (albumTitleFilter && filteredPhotos.length === 0) {
+    await handleAlbumTitleChange({
+      ...params,
+      value: albumTitleFilter,
+      pageChanged: true,
+    });
     return;
   }
 
