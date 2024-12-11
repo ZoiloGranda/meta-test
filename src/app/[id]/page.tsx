@@ -2,15 +2,19 @@
 import { getData } from "@/app/helpers/getPhotoData";
 import PhotoData from "@/app/layouts/PhotoData";
 import { PhotoWithMetadata } from "@/models/Photo";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const PhotoPage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const [photoWithMetadata, setPhotoWithMetadata] =
     useState<PhotoWithMetadata>();
+  const hasFetched = useRef(false);
 
   useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
     const fetchData = async () => {
       const { id } = await params;
       const data = await getData({ id });
